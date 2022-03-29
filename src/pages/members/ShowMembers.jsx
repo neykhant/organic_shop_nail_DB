@@ -54,7 +54,6 @@ const ShowMembers = ({ getMembers, deleteMembers, getMember }) => {
     navigate(`/admin/detail-members/${record.id}`);
   }
 
-  
   const columns = [
     {
       title: "မန်ဘာကုတ်",
@@ -104,13 +103,13 @@ const ShowMembers = ({ getMembers, deleteMembers, getMember }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col span={16}>
             <Title level={3}>Member စာရင်း</Title>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "var(--secondary-color)",
                 color: "var(--white-color)",
                 borderRadius: "5px"
               }}
@@ -118,10 +117,10 @@ const ShowMembers = ({ getMembers, deleteMembers, getMember }) => {
               onClick={() => navigate("/admin/create-members")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--primary-color)",
@@ -131,7 +130,7 @@ const ShowMembers = ({ getMembers, deleteMembers, getMember }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>

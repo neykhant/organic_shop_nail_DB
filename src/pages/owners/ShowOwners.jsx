@@ -9,7 +9,7 @@ import {
   saveOwners,
   getOwners,
   deleteOwners,
-  getOwner,
+  getOwner
 } from "../../store/actions";
 import { connect, useSelector } from "react-redux";
 
@@ -40,7 +40,7 @@ const ShowOwners = ({ getOwners, deleteOwners, getOwner }) => {
     notification[type]({
       message: "Deleted Your Data",
       description: "Your data have been deleted.",
-      duration: 3,
+      duration: 3
     });
   };
 
@@ -53,21 +53,21 @@ const ShowOwners = ({ getOwners, deleteOwners, getOwner }) => {
     {
       title: "ရက်စွဲ",
       dataIndex: "created_at",
-      render: (_, record) => getReadableDateDisplay(record.created_at),
+      render: (_, record) => getReadableDateDisplay(record.created_at)
     },
     {
       title: "ပစ္စည်းအမည်",
       dataIndex: "name",
-      render: (_, record) => record.stock.item.name,
+      render: (_, record) => record.stock.item.name
     },
     {
       title: "ပစ္စည်းကုတ်",
       dataIndex: "code",
-      render: (_, record) => record.stock.item.code,
+      render: (_, record) => record.stock.item.code
     },
     {
       title: "အရေအတွက်",
-      dataIndex: "quantity",
+      dataIndex: "quantity"
     },
     {
       title: "Actions",
@@ -81,8 +81,8 @@ const ShowOwners = ({ getOwners, deleteOwners, getOwner }) => {
             Delete
           </Button>
         </Space>
-      ),
-    },
+      )
+    }
   ];
 
   return (
@@ -95,15 +95,15 @@ const ShowOwners = ({ getOwners, deleteOwners, getOwner }) => {
           <Col span={3}>
             <Button
               style={{
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "var(--secondary-color)",
                 color: "var(--white-color)",
-                borderRadius: "5px",
+                borderRadius: "5px"
               }}
               size="middle"
               onClick={() => navigate("/admin/create-owner")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
         </Row>

@@ -83,6 +83,7 @@ import { connect, useSelector } from "react-redux";
 import EditExpenseNames from "../pages/expense_names/EditExpenseNames";
 import EditMerchants from "../pages/merchants/EditMerchants";
 import EditExpenses from "../pages/expenses/EditExpenses";
+import EditBuyMerchants from "../pages/buy_merchants_purchase/EditBuyMerchants";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -310,10 +311,10 @@ const Admin = ({ logout }) => {
               icon={<FileImageOutlined />}
             >
               <Menu.Item key="ShowAccounts" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-accounts">List</Link>
+                <Link to="/admin/show-accounts">စာရင်း</Link>
               </Menu.Item>
               <Menu.Item key="CreateAccounts" icon={<SaveOutlined />}>
-                <Link to="/admin/create-accounts">Create</Link>
+                <Link to="/admin/create-accounts">အသစ်ဖန်တီးရန်</Link>
               </Menu.Item>
               <Menu.Item key="ShowShops" icon={<UnorderedListOutlined />}>
                 <Link to="/admin/show-shops">ဆိုင်များ</Link>
@@ -326,10 +327,10 @@ const Admin = ({ logout }) => {
               icon={<UsergroupAddOutlined />}
             >
               <Menu.Item key="ShowMerchants" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-merchants">List</Link>
+                <Link to="/admin/show-merchants">စာရင်း</Link>
               </Menu.Item>
               <Menu.Item key="CreateMerchants" icon={<SaveOutlined />}>
-                <Link to="/admin/create-merchants">Create</Link>
+                <Link to="/admin/create-merchants">အသစ်ဖန်တီးရန်</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -339,10 +340,10 @@ const Admin = ({ logout }) => {
               icon={<UsergroupAddOutlined />}
             >
               <Menu.Item key="ShowMembers" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-members">List</Link>
+                <Link to="/admin/show-members">စာရင်း</Link>
               </Menu.Item>
               <Menu.Item key="CreateMembers" icon={<SaveOutlined />}>
-                <Link to="/admin/create-members">Create</Link>
+                <Link to="/admin/create-members">အသစ်ဖန်တီးရန်</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -352,10 +353,10 @@ const Admin = ({ logout }) => {
               icon={<DatabaseOutlined />}
             >
               <Menu.Item key="ShowItems" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-items">ပစ္စည်းများ</Link>
+                <Link to="/admin/show-items">ပစ္စည်းများစာရင်း</Link>
               </Menu.Item>
               <Menu.Item key="ShowStocks" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-stocks">Stock</Link>
+                <Link to="/admin/show-stocks">Stockစာရင်း</Link>
               </Menu.Item>
               <Menu.Item
                 key="ShowBuyMerchants"
@@ -378,11 +379,11 @@ const Admin = ({ logout }) => {
 
             <SubMenu key="Service" title="ဝန်ဆောင်မှု" icon={<FlagOutlined />}>
               <Menu.Item key="CreateService" icon={<SaveOutlined />}>
-                <Link to="/admin/create-service">Create</Link>
+                <Link to="/admin/create-service">အသစ်ဖန်တီးရန်</Link>
               </Menu.Item>
 
               <Menu.Item key="ShowService" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-service">List</Link>
+                <Link to="/admin/show-service">စာရင်း</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -412,11 +413,11 @@ const Admin = ({ logout }) => {
               icon={<UsergroupAddOutlined />}
             >
               <Menu.Item key="CreateOwner" icon={<SaveOutlined />}>
-                <Link to="/admin/create-owner">Create</Link>
+                <Link to="/admin/create-owner">အသစ်ဖန်တီးရန်</Link>
               </Menu.Item>
 
               <Menu.Item key="ShowOwner" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-owner">List</Link>
+                <Link to="/admin/show-owner">စာရင်း</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -521,6 +522,7 @@ const Admin = ({ logout }) => {
                 element={<CreateBuyMerchants />}
               />
               <Route path="show-buy-merchants" element={<ShowBuyMerchants />} />
+              <Route path="edit-buy-merchants/:id" element={<EditBuyMerchants />} />
               <Route path="create-expenses" element={<CreateExpenses />} />
               <Route path="show-expenses" element={<ShowExpenses />} />
               <Route path="edit-expenses/:id" element={<EditExpenses />} />

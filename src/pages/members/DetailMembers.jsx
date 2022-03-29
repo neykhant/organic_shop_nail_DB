@@ -157,20 +157,6 @@ const DetailMembers = ({ editMembers, getShops, getMember, getMembers }) => {
               readOnly={true}
             />
           </Form.Item>
-          <Form.Item style={{ textAlign: "right" }}>
-            <Button
-              style={{
-                backgroundColor: "var(--primary-color)",
-                color: "var(--white-color)",
-                borderRadius: "10px"
-              }}
-              size="large"
-              htmlType="submit"
-            >
-              <SaveOutlined />
-              သိမ်းမည်
-            </Button>
-          </Form.Item>
         </Form>
       </Space>
     </Layout>

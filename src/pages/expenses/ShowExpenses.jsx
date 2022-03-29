@@ -109,7 +109,7 @@ const ShowExpenses = ({ expense, getExpenses, deleteExpenses, getExpense }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>

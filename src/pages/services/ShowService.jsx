@@ -28,7 +28,7 @@ const ShowService = ({ service, getServices, deleteServices, getService }) => {
       const result = response.data;
       // setGetData(result);
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
     }
   };
   React.useEffect(() => {
@@ -117,7 +117,7 @@ const ShowService = ({ service, getServices, deleteServices, getService }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>
@@ -126,8 +126,6 @@ const ShowService = ({ service, getServices, deleteServices, getService }) => {
           columns={columns}
           pagination={{ defaultPageSize: 10 }}
           dataSource={service.services}
-          // dataSource={resultService}
-          // rowKey={resultService.key}
         />
       </Space>
     </Layout>

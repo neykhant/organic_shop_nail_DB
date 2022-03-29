@@ -9,7 +9,7 @@ import { getReadableDateDisplay } from "../../uitls/convertToHumanReadableTime";
 const { Title } = Typography;
 
 const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
-  console.log(item_transfer.itemTransfers);
+  // console.log(item_transfer.itemTransfers);
 
   const navigate = useNavigate();
 
@@ -92,7 +92,7 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
               onClick={() => navigate("/admin/create-item-transfer")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
           <Col span={3}>
@@ -105,7 +105,7 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>

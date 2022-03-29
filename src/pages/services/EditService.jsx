@@ -14,6 +14,7 @@ const EditService = ({ editServices, getService }) => {
   const navigate = useNavigate();
 
   const service = useSelector((state) => state.service.service);
+// console.log("service",service)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +30,7 @@ const EditService = ({ editServices, getService }) => {
   useEffect(() => {
     form.setFieldsValue({ code: service?.code });
     form.setFieldsValue({ commercial: service?.commercial });
-    // form.setFieldsValue({ percentage: service?.percentage });
+    form.setFieldsValue({ percentage: service?.percentage });
     form.setFieldsValue({ price: service?.price });
     form.setFieldsValue({ category: service?.category });
   }, [service]);

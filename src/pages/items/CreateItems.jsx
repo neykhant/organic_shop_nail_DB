@@ -35,7 +35,7 @@ const CreateItems = ({ saveItems }) => {
     if (fileList.length > 0) {
       setItems([
         ...items,
-        { ...values, image: fileList[0], key: items.length + 1 }
+        { ...values, image: fileList[0], key: Math.random() * 100 }
       ]);
       setFileList([]);
       form.resetFields();
@@ -66,8 +66,9 @@ const CreateItems = ({ saveItems }) => {
         formData.append(`items[${index}][buy_price]`, item.buy_price);
         formData.append(`items[${index}][sale_price]`, item.sale_price);
         formData.append(`images[${index}]`, item.image.originFileObj);
+        formData.append(`images[${index}][key]`, item.key);
       });
-// console.log(formData)
+      // console.log("formData",formData)
       await saveItems(formData);
       setItems([]);
       openNotificationWithIcon('success')
@@ -158,6 +159,7 @@ const CreateItems = ({ saveItems }) => {
                 message: "ကျေးဇူးပြု၍ ပစ္စည်းကုတ်ထည့်ပါ"
               }
             ]}
+            labelwidth={100}
           >
             <Input
               placeholder="ပစ္စည်းကုတ်ထည့်ပါ"
@@ -193,6 +195,7 @@ const CreateItems = ({ saveItems }) => {
                 message: "ကျေးဇူးပြု၍ ဝယ်ဈေးထည့်ပါ"
               }
             ]}
+           
           >
             <Input
               placeholder="ဝယ်ဈေးထည့်ပါ"

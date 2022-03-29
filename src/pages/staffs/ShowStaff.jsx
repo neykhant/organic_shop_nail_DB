@@ -13,7 +13,7 @@ const { Title } = Typography;
 const ShowStaff = ({getStaffs, deleteStaffs}) => {
   const dispatch = useDispatch()
   const staffs = useSelector((state) => state.staff.staffs);
-  console.log(staffs);
+  // console.log(staffs);
   useEffect(() => {
     const fetchData = async () => {
       await getStaffs();
@@ -95,10 +95,10 @@ const ShowStaff = ({getStaffs, deleteStaffs}) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col span={16}>
             <Title level={3}>ဝန်ထမ်းစာရင်း</Title>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--secondary-color)",
@@ -109,10 +109,10 @@ const ShowStaff = ({getStaffs, deleteStaffs}) => {
               onClick={() => navigate("/admin/create-staff")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--primary-color)",
@@ -122,7 +122,7 @@ const ShowStaff = ({getStaffs, deleteStaffs}) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>

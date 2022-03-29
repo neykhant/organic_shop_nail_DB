@@ -51,7 +51,7 @@ export const getItems = () => {
           key: item.id
         };
       });
-      // console.log(response.status)
+      // console.log(response.data.data)
       if (response.status === 200) {
         dispatch(showItems(result));
       }
@@ -64,7 +64,6 @@ export const getItems = () => {
     }
   };
 };
-
 
 export const getItem = (id) => {
   return async (dispatch) => {
@@ -95,6 +94,7 @@ export const saveItems = (data) => {
         "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/items/batchInsert",
         data
       );
+      // console.log(response.data.data)
       const result = {
         ...response.data.data,
         key: response.data.data.id
@@ -102,7 +102,7 @@ export const saveItems = (data) => {
       if (response.status === 201) {
         dispatch(createItems(result));
       }
-        console.log(result);
+        // console.log("result",result);
     } catch (error) {
       if (error) {
         dispatch(setItemErrors(error.response.data.data));

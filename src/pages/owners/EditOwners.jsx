@@ -20,6 +20,7 @@ const { Option } = Select;
 
 
 const EditOwners = ({ getStocks, getOwner, editOwners, owner }) => {
+
   const param = useParams();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -36,6 +37,9 @@ const EditOwners = ({ getStocks, getOwner, editOwners, owner }) => {
   }, [getStocks, getOwner]);
 
   const stocks = useSelector((state) => state.stock.stocks);
+  const ownersss = useSelector((state) => state)
+  console.log(owner)
+
 
   useEffect(() => {
     form.setFieldsValue({ quantity: owner.owner?.quantity });
