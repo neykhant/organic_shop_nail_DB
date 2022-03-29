@@ -6,6 +6,7 @@ import Sale from "./pages/Sale";
 import AuthRoute from "./routers/AuthRoute";
 import { connect } from "react-redux";
 import PrivateRoute from "./routers/PrivateRoute";
+import PrintSale from "./pages/sales/PrintSale";
 
 //organicapi.92134691-30-20190705152935.webstarterz.com
 const App = ({ auth }) => {
@@ -25,6 +26,14 @@ const App = ({ auth }) => {
           element={
             <AuthRoute auth={auth}>
               <Sale />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/admin/sale/:id"
+          element={
+            <AuthRoute auth={auth}>
+              <PrintSale />
             </AuthRoute>
           }
         />
