@@ -26,6 +26,8 @@ const VoucherReports = ({ voucher, getVouchers}) => {
     };
   }, [getVouchers]);
 
+  const hell0 = voucher.vouchers;
+  
   const columns = [
     {
       title: "ရက်စွဲ",
