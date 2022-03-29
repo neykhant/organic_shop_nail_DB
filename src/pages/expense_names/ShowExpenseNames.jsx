@@ -69,7 +69,7 @@ const ShowExpenseNames = ({ expenseNames, getExpenseNames, deleteExpenseNames, g
           <Col span={3}>
             <Button
               style={{
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "var(--secondary-color)",
                 color: "var(--white-color)",
                 borderRadius: "5px"
               }}
@@ -77,7 +77,7 @@ const ShowExpenseNames = ({ expenseNames, getExpenseNames, deleteExpenseNames, g
               onClick={() => navigate("/admin/create-expense-names")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
           <Col span={3}>
@@ -90,7 +90,7 @@ const ShowExpenseNames = ({ expenseNames, getExpenseNames, deleteExpenseNames, g
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>

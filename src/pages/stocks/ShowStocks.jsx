@@ -12,7 +12,7 @@ const { Title } = Typography;
 const ShowStocks = ({ stock, getStocks }) => {
   const navigate = useNavigate();
   const stockAll = stock.stocks;
-  console.log(stockAll)
+  // console.log(stockAll)
   useEffect(() => {
     const fetchData = async () => {
       await getStocks();
@@ -36,7 +36,7 @@ const ShowStocks = ({ stock, getStocks }) => {
       title: "ပစ္စည်းပုံ",
       dataIndex: "item",
       render: (_, record) => (
-        <img src={record.item.image} alt="ပစ္စည်းပုံ" width={100} height={100} />
+        <img src={record.item.image} alt="ပစ္စည်းပုံ" width={50} height={50} />
       )
     },
     {
@@ -84,10 +84,10 @@ const ShowStocks = ({ stock, getStocks }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col span={16}>
             <Title level={3}>Stock စာရင်း</Title>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--secondary-color)",
@@ -98,10 +98,10 @@ const ShowStocks = ({ stock, getStocks }) => {
               onClick={() => navigate("/admin/create-buy-merchants")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--primary-color)",
@@ -111,7 +111,7 @@ const ShowStocks = ({ stock, getStocks }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>
@@ -119,7 +119,7 @@ const ShowStocks = ({ stock, getStocks }) => {
           bordered
           columns={columns}
           dataSource={stockAll}
-          pagination={{ defaultPageSize: 10 }}
+          pagination={{ defaultPageSize: 6 }}
         />
       </Space>
     </Layout>

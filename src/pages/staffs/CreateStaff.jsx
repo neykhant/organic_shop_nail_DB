@@ -16,23 +16,22 @@ import { useNavigate } from "react-router-dom";
 import { saveStaffs } from "../../store/actions";
 import { connect } from "react-redux";
 
-
 const { Title, Text } = Typography;
 
-const CreateStaff = ({saveStaffs}) => {
+const CreateStaff = ({ saveStaffs }) => {
   const [fileList, setFileList] = useState([]);
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const openNotificationWithIcon = (type) => {
     notification[type]({
-      message: 'Saved Your Data',
-      description: 'Your data have been saved.',
+      message: "Saved Your Data",
+      description: "Your data have been saved.",
       duration: 3
     });
   };
-  
-  const onFinish =async (values) => {
+
+  const onFinish = async (values) => {
     if (fileList.length === 0) {
       message.error("ကျေးဇူးပြု၍၀န်ထမ်:ပုံထည့်ပါ");
     }
@@ -46,9 +45,9 @@ const CreateStaff = ({saveStaffs}) => {
       formData.append("bank_account", values.bank_account);
       formData.append("image", fileList[0].originFileObj);
       await saveStaffs(formData);
-    form.resetFields();
-
-      openNotificationWithIcon('success')
+      form.resetFields();
+      openNotificationWithIcon("success");
+      setFileList([]);
     }
   };
 

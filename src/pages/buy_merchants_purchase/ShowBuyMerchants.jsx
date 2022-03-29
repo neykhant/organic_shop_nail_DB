@@ -8,6 +8,7 @@ import {
   getMerchants,
   getPurchases,
   deletePurchases,
+  getPurchase
 } from "../../store/actions";
 import { getReadableDateDisplay } from "../../uitls/convertToHumanReadableTime";
 
@@ -20,6 +21,7 @@ const ShowBuyMerchants = ({
   getMerchants,
   getPurchases,
   deletePurchases,
+  getPurchase
 }) => {
   const navigate = useNavigate();
   const allPurchases = useSelector((state) => state.purchase.purchases);
@@ -64,11 +66,6 @@ const ShowBuyMerchants = ({
         (mer) => mer.id === value
       );
       setshowBuyMerchant([filterBuyMerchant]);
-      // let result = "";
-      // const filterMerchant = showBuyMerchant.forEach((mer) => {
-      //   // result.push(mer.company_name)
-      //   console.log(mer)
-      // })
     }
   };
 
@@ -85,6 +82,11 @@ const ShowBuyMerchants = ({
      setMyPurchase(filterMyPurchase)
     await deletePurchases(record.id);
     openNotificationWithIcon('error')
+  };
+
+  const handleClick =async (record) => {
+    await getPurchase(record.id)
+    navigate(`/admin/edit-buy-merchants/${record.id}`);
   };
 
   const columns = [
@@ -115,7 +117,10 @@ const ShowBuyMerchants = ({
       dataIndex: "action",
       render: (_, record) => (
         <Space direction="horizontal">
-          <Button type="primary">Edit</Button>
+          <Button type="primary"
+          onClick={() => handleClick(record)
+          }
+          >Edit</Button>
           <Button type="primary" danger onClick={() => handleDelete(record)}>
             Delete
           </Button>
@@ -128,13 +133,13 @@ const ShowBuyMerchants = ({
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col span={16}>
             <Title level={3}>အဝယ်စာရင်း</Title>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "var(--secondary-color)",
                 color: "var(--white-color)",
                 borderRadius: "5px",
               }}
@@ -142,10 +147,10 @@ const ShowBuyMerchants = ({
               onClick={() => navigate("/admin/create-buy-merchants")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--primary-color)",
@@ -155,7 +160,7 @@ const ShowBuyMerchants = ({
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>
@@ -223,4 +228,5 @@ export default connect(mapStateToProps, {
   getMerchants,
   getPurchases,
   deletePurchases,
+  getPurchase
 })(ShowBuyMerchants);

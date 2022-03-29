@@ -1,5 +1,6 @@
 import {
   SHOW_PURCHASES,
+  SHOW_PURCHASE,
   CREATE_PURCHASES,
   UPDATE_PURCHASES,
   FILTER_PURCHASES,
@@ -8,6 +9,7 @@ import {
   
   const initialState = {
     purchases: [],
+    purchase: {},
     error: {}
   };
   
@@ -21,6 +23,11 @@ import {
         return {
           ...state,
           purchases: action.purchases
+        };
+      case SHOW_PURCHASE:
+        return {
+          ...state,
+          purchase: action.purchase
         };
       case FILTER_PURCHASES:
         const filterPurchases = state.purchases.filter((purchase) => purchase.id !== action.id);

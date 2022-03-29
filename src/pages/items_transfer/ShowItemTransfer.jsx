@@ -4,12 +4,12 @@ import Layout from "antd/lib/layout/layout";
 import { ExportOutlined, PlusSquareOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { getItemTransfers } from "../../store/actions";
+import { getItemTransfers, deleteItemTransfers, getItemTransfer } from "../../store/actions";
 import { getReadableDateDisplay } from "../../uitls/convertToHumanReadableTime";
 const { Title } = Typography;
 
-const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
-  console.log(item_transfer.itemTransfers);
+const ShowItemTransfer = ({ item_transfer, getItemTransfers, deleteItemTransfers, getItemTransfer }) => {
+  // console.log(item_transfer.itemTransfers);
 
   const navigate = useNavigate();
 
@@ -25,10 +25,22 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
 
   const openNotificationWithIcon = (type) => {
     notification[type]({
-      message: "Saved Your Data",
-      description: "Your data have been saved.",
+      message: "Deleted Your Data",
+      description: "Your data have been deleted.",
       duration: 3,
     });
+  };
+
+  const handleClick =async (record) => {
+    console.log(record.id)
+    // await getItemTransfer(record.id)
+    // navigate(`/admin/edit-item-transfer/${record.id}`);
+  };
+
+  const handleDelete = async (record) => {
+    console.log(record.id)
+    await deleteItemTransfers(record.id);
+    openNotificationWithIcon('error')
   };
 
   const columns = [
@@ -62,10 +74,14 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
     {
       title: "Actions",
       dataIndex: "action",
-      render: (_) => (
+      render: (_, record) => (
         <Space direction="horizontal">
-          <Button type="primary">Edit</Button>
-          <Button type="primary" danger>
+          <Button type="primary"
+          onClick={() => handleClick(record)}
+          >Edit</Button>
+          <Button type="primary" danger
+          onClick={() => handleDelete(record)}
+          >
             Delete
           </Button>
         </Space>
@@ -92,7 +108,7 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
               onClick={() => navigate("/admin/create-item-transfer")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
           <Col span={3}>
@@ -105,7 +121,7 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>
@@ -124,4 +140,4 @@ const mapStateToProps = (store) => ({
   item_transfer: store.item_transfer,
 });
 
-export default connect(mapStateToProps, { getItemTransfers })(ShowItemTransfer);
+export default connect(mapStateToProps, { getItemTransfers, deleteItemTransfers, getItemTransfer })(ShowItemTransfer);

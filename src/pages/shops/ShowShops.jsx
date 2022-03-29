@@ -65,13 +65,13 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col span={16}>
             <Title level={3}>ဆိုင်အမည်စာရင်း</Title>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "var(--secondary-color)",
                 color: "var(--white-color)",
                 borderRadius: "5px"
               }}
@@ -79,10 +79,10 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
               onClick={() => navigate("/admin/create-shops")}
             >
               <PlusSquareOutlined />
-              New
+              အသစ်ထည့်မည်
             </Button>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--primary-color)",
@@ -92,7 +92,7 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
               size="middle"
             >
               <ExportOutlined />
-              Export
+              စာရင်းထုတ်မည်
             </Button>
           </Col>
         </Row>

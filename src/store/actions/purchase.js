@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   SHOW_PURCHASES,
+  SHOW_PURCHASE,
   CREATE_PURCHASES,
   UPDATE_PURCHASES,
   FILTER_PURCHASES,
@@ -12,6 +13,10 @@ export const showPurchases = (purchases) => ({
   purchases
 });
 
+export const showPurchase = (purchase) => ({
+  type: SHOW_PURCHASE,
+  purchase
+});
 
 export const createPurchases = (purchase) => ({
   type: CREATE_PURCHASES,
@@ -32,6 +37,28 @@ export const setPurchaseErrors = (error) => ({
   type: ERROR_PURCHASES,
   error
 });
+
+export const getPurchase = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/purchases/${id}`
+      );
+      const result = response.data.data;
+      if (response.status === 200) {
+        dispatch(showPurchase(result));
+      }
+      console.log(result)
+    } catch (error) {
+      if (error.response.status === 404) {
+        dispatch(setPurchaseErrors(error.response.data.data));
+      } else {
+        dispatch(setPurchaseErrors(error.response.data));
+      }
+    }
+  };
+};
+
 
 export const getPurchases = () => {
   return async (dispatch) => {
