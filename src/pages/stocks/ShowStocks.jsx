@@ -36,7 +36,7 @@ const ShowStocks = ({ stock, getStocks }) => {
       title: "ပစ္စည်းပုံ",
       dataIndex: "item",
       render: (_, record) => (
-        <img src={record.item.image} alt="ပစ္စည်းပုံ" width={100} height={100} />
+        <img src={record.item.image} alt="ပစ္စည်းပုံ" width={50} height={50} />
       )
     },
     {
@@ -119,7 +119,7 @@ const ShowStocks = ({ stock, getStocks }) => {
           bordered
           columns={columns}
           dataSource={stockAll}
-          pagination={{ defaultPageSize: 10 }}
+          pagination={{ defaultPageSize: 6 }}
         />
       </Space>
     </Layout>

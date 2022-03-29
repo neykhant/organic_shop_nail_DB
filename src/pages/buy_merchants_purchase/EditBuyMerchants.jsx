@@ -46,6 +46,9 @@ const EditBuyMerchants = ({
   const param = useParams();
   const [buyMerchant, setBuyMerchant] = useState(null);
 
+  console.log(purchase.purchase.purchase_items)
+
+
   useEffect(() => {
     const fetchData = async () => {
       await getPurchase(param?.id);
@@ -84,6 +87,7 @@ const EditBuyMerchants = ({
       fetchData();
     };
   }, [getMerchants]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -179,6 +183,7 @@ const EditBuyMerchants = ({
       title: "ပစ္စည်းအမည်",
       dataIndex: "item",
       render: (_, record) => {
+        console.log("rr", record)
         return record.item.name;
       }
     },

@@ -483,6 +483,7 @@ const Admin = ({ logout }) => {
                 element={<CreateItemTransfer />}
               />
               <Route path="show-item-transfer" element={<ShowItemTransfer />} />
+              <Route path="edit-item-transfer/:id" element={<ShowItemTransfer />} />
               <Route
                 path="show-item-change-list"
                 element={<ShowItemChangeList />}

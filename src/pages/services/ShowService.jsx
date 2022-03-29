@@ -70,6 +70,7 @@ const ShowService = ({ service, getServices, deleteServices, getService }) => {
     //   title: "ကော်မရှင်",
     //   dataIndex: "commercial"
     // },
+    
     {
       title: "Actions",
       dataIndex: "action",

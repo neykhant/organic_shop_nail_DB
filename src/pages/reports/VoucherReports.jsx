@@ -4,24 +4,27 @@ import Layout from "antd/lib/layout/layout";
 import { PlusSquareOutlined, ExportOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { getItems } from "../../store/actions";
+import { getVouchers } from "../../store/actions";
 
 const { Title } = Typography;
 
-const VoucherReports = () => {
+const VoucherReports = ({ voucher, getVouchers}) => {
   const { Option } = Select;
   const { RangePicker } = DatePicker;
   const navigate = useNavigate();
 
+  console.log("vv",voucher.vouchers)
+
+
   useEffect(() => {
     const fetchData = async () => {
-      await getItems();
+      await getVouchers();
     };
     fetchData();
     return () => {
       fetchData();
     };
-  }, [getItems]);
+  }, [getVouchers]);
 
   const columns = [
     {
@@ -41,8 +44,6 @@ const VoucherReports = () => {
       title: "ဝယ်ယူသောပမာဏ",
       dataIndex: "buy_amount"
     },
-    //
-   
     {
       title: "Actions",
       dataIndex: "action",
@@ -64,14 +65,11 @@ const VoucherReports = () => {
           <Col span={18}>
             <Title level={3}>ဘောင်ချာအရောင်း မှတ်တမ်းစာမျက်နှာ</Title>
           </Col>
-          <Col span={3}>
-             
+          <Col span={3}>   
           </Col>
-          <Col span={3}>
-             
+          <Col span={3}>    
           </Col>
         </Row>
-
         <Space direction="vertical" size={12}><RangePicker /></Space>
         
         <Row>
@@ -106,11 +104,15 @@ const VoucherReports = () => {
           bordered
           columns={columns}
           pagination={{ defaultPageSize: 10 }}
-          //   dataSource={item.items}
+          dataSource={voucher.vouchers}
         />
       </Space>
     </Layout>
   )
 }
 
-export default VoucherReports
+const mapStateToProps = (store) => ({
+  voucher: store.voucher
+});
+
+export default connect(mapStateToProps, { getVouchers })(VoucherReports);

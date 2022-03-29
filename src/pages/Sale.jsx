@@ -12,7 +12,8 @@ import {
   Button,
   Image,
   Table,
-  InputNumber
+  InputNumber,
+  message
 } from "antd";
 import {
   PlusSquareOutlined,
@@ -165,6 +166,9 @@ const Sale = ({
   };
 
   const handleMemberOnChange = (value) => {
+    // if(value === undefined){
+
+    // }
     const findMember = member.members.find((member) => member.id === value);
     setCustomerName(findMember.name);
     setCustomerPhone(findMember.phone);
@@ -186,7 +190,17 @@ const Sale = ({
     let items = [];
     let itemBuyTotal = 0;
     let itemTotal = 0;
-
+    if(sales.length === 0){
+      message.error("ကျေးဇူးပြု၍အဝယ်ပစ္စည်းများထည့်ပါ");
+    }else if(paid === 0){
+      message.error("ကျေးဇူးပြု၍ပေးငွေထည့်ပါ");
+    }else if(customerName === ""){
+      message.error("ကျေးဇူးပြု၍ဝယ်ယူသူအမည်ထည့်ပါ");
+    }else if(customerPhone ===  ""){
+      message.error("ကျေးဇူးပြု၍ဝယ်ယူသူဖုန်းနံပါတ်ထည့်ပါ");
+    }else if(payMethod === undefined ){
+      message.error("ကျေးဇူးပြု၍ငွေချေရမည့်နည်းလမ်ထည့်ပါ");
+    }else{
     sales.forEach((sale) => {
       if (sale.is_item) {
         itemBuyTotal += Number(sale.capital) * Number(sale.quantity);
@@ -237,10 +251,11 @@ const Sale = ({
       };
     }
 
-    console.log(savedData);
-
+    // console.log("ss",savedData);
+    // console.log("metosd",payMethod)
     const response = await call("post", "invoices", savedData);
-    console.log(response);
+    console.log("rr",response);
+  }
   };
 
   const columns = [
