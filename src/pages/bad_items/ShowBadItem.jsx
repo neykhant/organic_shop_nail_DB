@@ -21,7 +21,7 @@ const ShowBadItem = ({getBadItems, deleteBadItems}) => {
     return () => {
       fetchData();
     };
-  }, [getBadItems]);
+  }, []);
 
   const navigate = useNavigate();
 

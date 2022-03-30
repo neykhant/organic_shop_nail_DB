@@ -9,6 +9,7 @@ import {
   Table,
   message,
   Checkbox,
+  Alert,
 } from "antd";
 import Layout from "antd/lib/layout/layout";
 import {
@@ -16,14 +17,16 @@ import {
   SaveOutlined,
   PlusSquareOutlined,
 } from "@ant-design/icons";
-import { saveBadItems, getStocks } from "../../store/actions";
+import { saveBadItems, getStocks, clearAlert } from "../../store/actions";
 import { connect, useSelector } from "react-redux";
 import dateFormat from "dateformat";
+import store from "../../store";
+
 const now = new Date();
 
 const { Title } = Typography;
 const { Option } = Select;
-const CreateBadItem = ({ getStocks, saveBadItems }) => {
+const CreateBadItem = ({ getStocks, saveBadItems, clearAlert, bad_item }) => {
   const stocks = useSelector((state) => state.stock.stocks);
   const allStocks = stocks.map((stock) => {
     return {
@@ -44,6 +47,11 @@ const CreateBadItem = ({ getStocks, saveBadItems }) => {
       fetchData();
     };
   }, [getStocks]);
+
+
+  useEffect(() => {
+    store.dispatch(clearAlert());
+  }, []);
 
   const onFinish = (values) => {
     const stock = allStocks.find((stock) => stock.id === values.stock_id);
@@ -104,6 +112,20 @@ const CreateBadItem = ({ getStocks, saveBadItems }) => {
 
   return (
     <Layout style={{ margin: "20px" }}>
+      {bad_item.error !== "" ? (
+        <Alert
+          message="Errors"
+          description={bad_item.error}
+          type="error"
+          showIcon
+          closable
+        />
+      ) : null}
+
+      {bad_item.isSuccess && (
+        <Alert message="Successfully Created" type="success" showIcon />
+      )}
+
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
           ချို့ယွင်းချက်ရှိပစ္စည်းများ
@@ -231,4 +253,9 @@ const CreateBadItem = ({ getStocks, saveBadItems }) => {
   );
 };
 
-export default connect(null, { saveBadItems, getStocks })(CreateBadItem);
+
+const mapStateToProps = (store) => ({
+  bad_item: store.bad_item
+});
+
+export default connect(mapStateToProps, { saveBadItems, getStocks, clearAlert })(CreateBadItem);

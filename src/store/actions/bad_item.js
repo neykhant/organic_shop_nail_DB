@@ -1,13 +1,11 @@
-// 
-
-
 import axios from "axios";
 import {
   SHOW_BADITEMS,
   CREATE_BADITEMS,
   UPDATE_BADITEMS,
   FILTER_BADITEMS,
-  ERROR_BADITEMS
+  ERROR_BADITEMS,
+  IS_SUCCESS_ERROR_BADITEMS
 } from "../type";
 
 export const showBadItems = (baditems) => ({
@@ -35,6 +33,13 @@ export const setBadItemErrors = (error) => ({
   type: ERROR_BADITEMS,
   error
 });
+
+
+export const badItemSuccess = (isSuccess) => ({
+  type: IS_SUCCESS_ERROR_BADITEMS,
+  isSuccess
+});
+
 
 export const getBadItems = () => {
   return async (dispatch) => {
@@ -69,13 +74,14 @@ export const saveBadItems = (data) => {
         "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/damage-items/batchInsert",
         data
       );
-      console.log(response);
+      const result = response.data.data;
+      if(response.status === 201){
+        dispatch(createBadItems(result))
+      }
     } catch (error) {
       if (error) {
-        dispatch(setBadItemErrors(error.response.data.data));
-      } else {
-        dispatch(setBadItemErrors(error.response.data));
-      }
+        dispatch(setBadItemErrors("There was an Error during Saving...."));
+      } 
     }
   };
 };
