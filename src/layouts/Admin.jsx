@@ -420,7 +420,7 @@ const Admin = ({ logout }) => {
                 <Link to="/admin/create-owner">အသစ်ဖန်တီးရန်</Link>
               </Menu.Item>
 
-              <Menu.Item key="ShowOwner" icon={<UnorderedListOutlined />}>
+              <Menu.Item key="ShowOwnerList" icon={<UnorderedListOutlined />}>
                 <Link to="/admin/show-owner">စာရင်း</Link>
               </Menu.Item>
             </SubMenu>

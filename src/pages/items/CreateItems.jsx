@@ -23,7 +23,7 @@ import item from "../../store/reducers/item";
 
 const { Title, Text } = Typography;
 
-const CreateItems = ({ saveItems }) => {
+const CreateItems = ({ saveItems, error }) => {
   const [items, setItems] = useState([]);
   const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
@@ -49,12 +49,12 @@ const CreateItems = ({ saveItems }) => {
 
   const openNotificationWithIcon = (type) => {
     notification[type]({
-      message: 'Saved Your Data',
-      description: 'Your data have been saved.',
+      message: "Saved Your Data",
+      description: "Your data have been saved.",
       duration: 3
     });
   };
-  
+
   const handleSave = async () => {
     if (items.length === 0) {
       message.error("ကျေးဇူးပြု၍ပစ္စည်းများထည့်ပါ");
@@ -71,7 +71,7 @@ const CreateItems = ({ saveItems }) => {
       // console.log("formData",formData)
       await saveItems(formData);
       setItems([]);
-      openNotificationWithIcon('success')
+      openNotificationWithIcon("success");
     }
   };
   const columns = [
@@ -195,7 +195,6 @@ const CreateItems = ({ saveItems }) => {
                 message: "ကျေးဇူးပြု၍ ဝယ်ဈေးထည့်ပါ"
               }
             ]}
-           
           >
             <Input
               placeholder="ဝယ်ဈေးထည့်ပါ"
@@ -264,4 +263,8 @@ const CreateItems = ({ saveItems }) => {
   );
 };
 
-export default connect(null, { saveItems })(CreateItems);
+const mapStateToProps = (store) => ({
+  error: store.error
+});
+
+export default connect(mapStateToProps, { saveItems })(CreateItems);

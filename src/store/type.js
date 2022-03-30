@@ -55,6 +55,11 @@ export const SHOW_SHOP = 'SHOW_SHOP';
 export const CREATE_SHOPS = 'CREATE_SHOPS';
 export const FILTER_SHOPS = 'FILTER_SHOPS';
 export const UPDATE_SHOPS = 'UPDATE_SHOPS';
+export const IS_SUCCESS_SHOP = 'IS_SUCCESS_SHOP';
+
+export const CLEAR_ALERT = 'CLEAR_ALERT';
+
+
 
 export const SHOW_ACCOUNTS = 'SHOW_ACCOUNTS';
 export const CREATE_ACCOUNTS = 'CREATE_ACCOUNTS';

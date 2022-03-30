@@ -25,7 +25,7 @@ const ReportScreem = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getItems();
+      // await getItems();
     };
     fetchData();
     return () => {
@@ -97,4 +97,5 @@ const ReportScreem = () => {
   );
 };
 
-export default ReportScreem;
+
+export default  ReportScreem;

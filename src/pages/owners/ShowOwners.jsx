@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
 import Layout from "antd/lib/layout/layout";
-import { PlusSquareOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined,  DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { getReadableDateDisplay } from "../../uitls/convertToHumanReadableTime";
 import dateFormat, { masks } from "dateformat";
@@ -75,10 +75,10 @@ const ShowOwners = ({ getOwners, deleteOwners, getOwner }) => {
       render: (_, record) => (
         <Space direction="horizontal">
           <Button type="primary" onClick={() => handleClick(record.id)}>
-            Edit
+          <EditOutlined/>
           </Button>
           <Button type="primary" danger onClick={() => handleDelete(record)}>
-            Delete
+          <DeleteOutlined/>
           </Button>
         </Space>
       )

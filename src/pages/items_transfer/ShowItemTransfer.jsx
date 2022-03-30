@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
 import Layout from "antd/lib/layout/layout";
-import { ExportOutlined, PlusSquareOutlined } from "@ant-design/icons";
+import { ExportOutlined, PlusSquareOutlined,  DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { getItemTransfers, deleteItemTransfers, getItemTransfer } from "../../store/actions";
@@ -78,11 +78,11 @@ const ShowItemTransfer = ({ item_transfer, getItemTransfers, deleteItemTransfers
         <Space direction="horizontal">
           <Button type="primary"
           onClick={() => handleClick(record)}
-          >Edit</Button>
+          > <EditOutlined/></Button>
           <Button type="primary" danger
           onClick={() => handleDelete(record)}
           >
-            Delete
+             <DeleteOutlined/>
           </Button>
         </Space>
       ),

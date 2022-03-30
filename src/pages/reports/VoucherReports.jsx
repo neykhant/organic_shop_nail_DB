@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Typography, Space, Row, Col, Button, Table, DatePicker, Input, Select } from "antd";
 import Layout from "antd/lib/layout/layout";
-import { PlusSquareOutlined, ExportOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined, ExportOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import queryString from 'query-string';
@@ -14,10 +14,6 @@ const VoucherReports = ({ voucher, getVouchers}) => {
   const { Option } = Select;
   const { RangePicker } = DatePicker;
   const location=useLocation();
-  
-
-  console.log("vv",voucher.vouchers)
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +55,7 @@ const VoucherReports = ({ voucher, getVouchers}) => {
             window.location=`/admin/sale/${record.id}`;
           }}>Detail</Button>
           <Button type="primary" danger>
-            Delete
+          <DeleteOutlined/>
           </Button>
         </Space>
       )

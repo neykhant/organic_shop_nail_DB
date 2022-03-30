@@ -8,6 +8,7 @@ import {
   ERROR_ITEM
 } from "../type";
 
+
 export const showItems = (items) => ({
   type: SHOW_ITEMS,
   items
@@ -27,7 +28,6 @@ export const filterItems = (id) => ({
   type: FILTER_ITEMS,
   id
 });
-
 
 export const updateItems = (data) => ({
   type: UPDATE_ITEMS,
@@ -51,7 +51,7 @@ export const getItems = () => {
           key: item.id
         };
       });
-      // console.log(response.data.data)
+      // console.log(result)
       if (response.status === 200) {
         dispatch(showItems(result));
       }
@@ -94,17 +94,14 @@ export const saveItems = (data) => {
         "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/items/batchInsert",
         data
       );
-      // console.log(response.data.data)
       const result = {
         ...response.data.data,
         key: response.data.data.id
       };
-      if (response.status === 201) {
-        dispatch(createItems(result));
-      }
-        // console.log("result",result);
+      dispatch(createItems(result));
     } catch (error) {
       if (error) {
+        console.log(error)
         dispatch(setItemErrors(error.response.data.data));
       } else {
         dispatch(setItemErrors(error.response.data));

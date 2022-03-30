@@ -1,34 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Typography, Space, Button, notification } from "antd";
+import {
+  Form,
+  Input,
+  Typography,
+  Space,
+  Button,
+  notification,
+  message,
+  Alert
+} from "antd";
 import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
-import { connect } from "react-redux";
-import { saveShops } from "../../store/actions";
+import { connect, useDispatch } from "react-redux";
+import { saveShops, clearAlert } from "../../store/actions";
 import { useNavigate } from "react-router-dom";
+import store from "../../store";
 
 const { Title } = Typography;
 
-
-const CreateShops = ({saveShops}) => {
+const CreateShops = ({ saveShops, shop, clearAlert }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: 'Save Your Data',
-      description: 'Your data have been saved.',
-      duration: 3
-    });
-  };
+  console.log(shop.isSuccess);
+
+  useEffect(() => {
+    store.dispatch(clearAlert());
+  }, []);
 
   const onFinish = async (values) => {
-    await saveShops(values)
+    await saveShops(values);
     form.resetFields();
-    openNotificationWithIcon('success')
-    // navigate("/admin/show-shops")
+    // openNotificationWithIcon("success");
+    // navigate("/admin/show-shops");
   };
 
   return (
     <Layout style={{ margin: "20px" }}>
+      {shop.error.length > 0 ? (
+        <Alert
+          message="Errors"
+          description={shop.error}
+          type="error"
+          showIcon
+          closable
+        />
+      ) : null}
+
+      {shop.isSuccess && (
+        <Alert message="Successfully Created" type="success" showIcon />
+      )}
+
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
           ဆိုင်အမည် သွင်းခြင်း စာမျက်နှာ
@@ -85,4 +106,8 @@ const CreateShops = ({saveShops}) => {
   );
 };
 
-export default connect(null, { saveShops })(CreateShops);
+const mapStateToProps = (store) => ({
+  shop: store.shop
+});
+
+export default connect(mapStateToProps, { saveShops, clearAlert })(CreateShops);

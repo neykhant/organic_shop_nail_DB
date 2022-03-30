@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
 import Layout from "antd/lib/layout/layout";
-import { PlusSquareOutlined, ExportOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined, ExportOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getStaffs, deleteStaffs } from "../../store/actions";
@@ -82,9 +82,9 @@ const ShowStaff = ({getStaffs, deleteStaffs}) => {
       dataIndex: "action",
       render: (_, record) => (
         <Space direction="horizontal">
-          <Button type="primary" onClick={() => handleClick(record)}>Edit</Button>
+          <Button type="primary" onClick={() => handleClick(record)}> <EditOutlined/></Button>
           <Button type="primary" danger onClick={ () =>handleDelete(record) }>
-            Delete
+          <DeleteOutlined/>
           </Button>
         </Space>
       )

@@ -1,7 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
+import {
+  Typography,
+  Space,
+  Row,
+  Col,
+  Button,
+  Table,
+  notification,
+  message,
+  Alert
+} from "antd";
 import Layout from "antd/lib/layout/layout";
-import { PlusSquareOutlined, ExportOutlined } from "@ant-design/icons";
+import {
+  PlusSquareOutlined,
+  ExportOutlined,
+  DeleteOutlined,
+  EditOutlined
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { getShops, deleteShops, getShop } from "../../store/actions";
@@ -12,7 +27,7 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
   const navigate = useNavigate();
 
   const handleClick = async (record) => {
-     await getShop(record.id);
+    await getShop(record.id);
     navigate(`/admin/edit-shops/${record.id}`);
   };
 
@@ -34,6 +49,7 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
       duration: 3
     });
   };
+
   const handleDelete = async (record) => {
     await deleteShops(record.id);
     openNotificationWithIcon("error");
@@ -51,10 +67,10 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
       render: (_, record) => (
         <Space direction="horizontal">
           <Button type="primary" onClick={() => handleClick(record)}>
-            Edit
+            <EditOutlined />
           </Button>
           <Button type="primary" danger onClick={() => handleDelete(record)}>
-            Delete
+            <DeleteOutlined />
           </Button>
         </Space>
       )
@@ -63,6 +79,26 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
 
   return (
     <Layout style={{ margin: "20px" }}>
+      {(shop.error).length > 0 ? (
+        <Alert
+        message="Errors"
+        description={shop.error}
+        type="error"
+        showIcon
+        closable
+      />
+      ) : null}
+{/* 
+{shop.isSuccess && (
+        <Alert
+          message="Successfully!!!"
+          description="Your data have been saved"
+          type="success"
+          showIcon
+          closable
+        />
+      )} */}
+
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
           <Col span={16}>
@@ -111,4 +147,6 @@ const mapStateToProps = (store) => ({
   shop: store.shop
 });
 
-export default connect(mapStateToProps, { getShops, deleteShops, getShop })(ShowShops);
+export default connect(mapStateToProps, { getShops, deleteShops, getShop })(
+  ShowShops
+);

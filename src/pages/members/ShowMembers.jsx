@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
 import Layout from "antd/lib/layout/layout";
-import { PlusSquareOutlined, ExportOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined, ExportOutlined,  DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getMembers, deleteMembers, getMember } from "../../store/actions";
@@ -89,10 +89,10 @@ const ShowMembers = ({ getMembers, deleteMembers, getMember }) => {
             type="primary"
             onClick={() => handleClick(record)}
           >
-            Edit
+             <EditOutlined/>
           </Button>
           <Button type="primary" danger onClick={() => handleDelete(record)}>
-            Delete
+          <DeleteOutlined/>
           </Button>
         </Space>
       )

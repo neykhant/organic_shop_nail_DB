@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, Input, Typography, Space, Button } from "antd";
+import { Form, Input, Typography, Space, Button, Alert } from "antd";
 import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const EditShops = ({ editShops,getShop }) => {
   const param = useParams();
 
   const shop = useSelector((state) => state.shop.shop);
+  const error = useSelector((state) => state.shop.error);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +28,7 @@ const EditShops = ({ editShops,getShop }) => {
 
 
   useEffect(() => {
-     
       form.setFieldsValue({ name: shop.name });
-    
   }, [shop]);
 
   const onFinish = async (values) => {
@@ -45,6 +44,16 @@ const EditShops = ({ editShops,getShop }) => {
 
   return (
     <Layout style={{ margin: "20px" }}>
+      {error.length > 0 ? (
+        <Alert
+        message="Errors"
+        description={error}
+        type="error"
+        showIcon
+        closable
+      />
+      ) : null}
+
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
           ဆိုင်အမည် သွင်းခြင်း စာမျက်နှာ

@@ -1,7 +1,7 @@
 import { ADD_ERROR, REMOVE_ERROR } from "store/types.js";
 
 const initialState = {
-  message: null,
+  message: "errorss",
 };
 
 const error = (state = initialState, action) => {
@@ -17,7 +17,6 @@ const error = (state = initialState, action) => {
         ...state,
         message: null,
       };
-
     default:
       return state;
   }
