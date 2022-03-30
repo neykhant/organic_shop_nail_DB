@@ -74,6 +74,21 @@ const CreateItems = ({ saveItems, error }) => {
       openNotificationWithIcon("success");
     }
   };
+
+  //for barcode
+  const [barcodeInputValue, updateBarcodeInputValue] = useState("");
+  const barcodeAutoFocus = () => {
+    document.getElementById("SearchbyScanning").focus();
+  };
+  const onChangeBarcode = (event) => {
+    updateBarcodeInputValue(event.target.value);
+  };
+  const handleSearch = () => {
+    alert(barcodeInputValue);
+    updateBarcodeInputValue("");
+    document.getElementById("SearchbyScanning").focus();
+  };
+
   const columns = [
     {
       title: "ပစ္စည်းပုံ",
@@ -120,6 +135,7 @@ const CreateItems = ({ saveItems, error }) => {
         <Title style={{ textAlign: "center" }} level={3}>
           ပစ္စည်းအချက်အလက်သွင်းရန်စာမျက်နှာ
         </Title>
+        
         <Form
           labelCol={{
             xl: {
@@ -150,7 +166,22 @@ const CreateItems = ({ saveItems, error }) => {
             />
             <Text type="secondary">ကျေးဇူးပြု၍ပစ္စည်းပုံထည့်ပါ</Text>
           </Space>
-          <Form.Item
+
+          <div className="App">
+         <label htmlFor="">ပစ္စည်းကုတ်</label>
+          <input
+            autoFocus={true}
+            placeholder="Start Scanning"
+            id="SearchbyScanning"
+            className="SearchInput"
+            value={barcodeInputValue}
+            onChange={onChangeBarcode}
+            onBlur={barcodeAutoFocus}
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+        
+          {/* <Form.Item
             name="code"
             label="ပစ္စည်းကုတ်"
             rules={[
@@ -162,12 +193,23 @@ const CreateItems = ({ saveItems, error }) => {
             labelwidth={100}
           >
             <Input
+              autoFocus={true}
+              // placeholder="Start Scanning"
+              id="SearchbyScanning"
+              className="SearchInput"
+              value={barcodeInputValue}
+              onChange={onChangeBarcode}
+              onBlur={barcodeAutoFocus}
+
+
               placeholder="ပစ္စည်းကုတ်ထည့်ပါ"
               prefix={<EditOutlined />}
               style={{ borderRadius: "10px" }}
               size="large"
             />
-          </Form.Item>
+            <button onClick={handleSearch}>Search</button>
+          </Form.Item> */}
+
           <Form.Item
             name="name"
             label="ပစ္စည်းအမည်"
