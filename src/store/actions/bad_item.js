@@ -66,11 +66,10 @@ export const saveBadItems = (data) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/damage-items",
+        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/damage-items/batchInsert",
         data
       );
       console.log(response);
-    //   createBadItems
     } catch (error) {
       if (error) {
         dispatch(setBadItemErrors(error.response.data.data));

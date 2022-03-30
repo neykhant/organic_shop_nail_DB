@@ -373,11 +373,11 @@ const Admin = ({ logout }) => {
                 </Link>
               </Menu.Item>
               <Menu.Item key="ShowOwner" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-owner">ပစ္စည်းထုတ်သုံးခြင်</Link>
+                <Link to="/admin/show-owner">ပစ္စည်းထုတ်သုံးခြင်:</Link>
               </Menu.Item>
-              {/* <Menu.Item key="CreateBadItems" icon={<SaveOutlined />}>
-                <Link to="/admin/create-bad-item">ချို့ယွင်းချက်ရှိပစ္စည်း</Link>
-              </Menu.Item> */}
+              <Menu.Item key="CreateBadItems" icon={<UnorderedListOutlined />}>
+                <Link to="/admin/show-bad-item">ချို့ယွင်းချက်ရှိပစ္စည်း</Link>
+              </Menu.Item>
             </SubMenu>
 
             <SubMenu key="Service" title="ဝန်ဆောင်မှု" icon={<FlagOutlined />}>
@@ -456,20 +456,6 @@ const Admin = ({ logout }) => {
                 <Link to="/admin/report-screem">Report Screem</Link>
               </Menu.Item>
             </SubMenu>
-
-            <SubMenu
-              key="badItem"
-              title="BadItem"
-              icon={<UsergroupAddOutlined />}
-            >
-              <Menu.Item key="ShowBadItems" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-bad-item">စာရင်း</Link>
-              </Menu.Item>
-              <Menu.Item key="CreateBadItem" icon={<SaveOutlined />}>
-                <Link to="/admin/create-bad-item">အသစ်ဖန်တီးရန်</Link>
-              </Menu.Item>
-            </SubMenu>
-
           </Menu>
         </Sider>
         <Layout>
