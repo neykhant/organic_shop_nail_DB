@@ -40,7 +40,7 @@ export const getBadItems = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/owner-used-items"
+        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/damage-items"
       );
       const result = response.data.data.map((baditem) => {
         return {
@@ -66,7 +66,7 @@ export const saveBadItems = (data) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/owner-used-items",
+        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/damage-items",
         data
       );
       console.log(response);
