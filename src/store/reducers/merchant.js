@@ -4,13 +4,16 @@ import {
   CREATE_MERCHANTS,
   UPDATE_MERCHANTS,
   FILTER_MERCHANTS,
-  ERROR_ITEM
+  ERROR_MERCHANT,
+  CLEAR_ALERT,
+  IS_SUCCESS_MERCHANT
 } from "../type";
 
 const initialState = {
   merchants: [],
   merchant: {},
-  error: {}
+  error: [],
+  isSuccess: false
 };
 
 const merchant = (state = initialState, action) => {
@@ -18,18 +21,22 @@ const merchant = (state = initialState, action) => {
     case CREATE_MERCHANTS:
       return {
         ...state,
-        merchants: [action.merchant, ...state.merchants]
+        merchants: [action.merchant, ...state.merchants],
+        isSuccess: true,
+        error: []
       };
     case SHOW_MERCHANTS:
       return {
         ...state,
-        merchants: action.merchants
+        merchants: action.merchants,
+        error: []
       };
 
     case SHOW_MERCHANT:
       return {
         ...state,
-        merchant: action.merchant
+        merchant: action.merchant,
+        error: []
       };
     case FILTER_MERCHANTS:
       const filterMerchant = state.merchants.filter(
@@ -37,7 +44,9 @@ const merchant = (state = initialState, action) => {
       );
       return {
         ...state,
-        merchants: filterMerchant
+        merchants: filterMerchant,
+        error: [],
+        isSuccess: true
       };
     case UPDATE_MERCHANTS:
       const index = state.merchants.findIndex(
@@ -45,12 +54,26 @@ const merchant = (state = initialState, action) => {
       );
       state.merchants[index] = action.data;
       return {
-        ...state
+        ...state,
+        isSuccess: true,
+        error: []
       };
-    case ERROR_ITEM:
+    case ERROR_MERCHANT:
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        isSuccess: false
+      };
+    case CLEAR_ALERT:
+      return {
+        ...state,
+        error: [],
+        isSuccess: false
+      };
+    case IS_SUCCESS_MERCHANT:
+      return {
+        ...state,
+        isSuccess: action.isSuccess
       };
     default:
       return state;

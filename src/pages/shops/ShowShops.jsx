@@ -19,12 +19,24 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { getShops, deleteShops, getShop } from "../../store/actions";
+import {
+  getShops,
+  deleteShops,
+  getShop,
+  clearAlert
+} from "../../store/actions";
+import store from "../../store";
 
 const { Title } = Typography;
 
-const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
+const ShowShops = ({ shop, getShops, deleteShops, getShop, clearAlert }) => {
   const navigate = useNavigate();
+
+  // console.log(shop.isSuccess);
+
+  useEffect(() => {
+    store.dispatch(clearAlert());
+  }, []);
 
   const handleClick = async (record) => {
     await getShop(record.id);
@@ -42,17 +54,9 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
     };
   }, [getShops]);
 
-  const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: "Delete Your Data",
-      description: "Your data have been deleted.",
-      duration: 3
-    });
-  };
-
   const handleDelete = async (record) => {
     await deleteShops(record.id);
-    openNotificationWithIcon("error");
+    // openNotificationWithIcon("error");
   };
 
   const columns = [
@@ -79,25 +83,19 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop }) => {
 
   return (
     <Layout style={{ margin: "20px" }}>
-      {(shop.error).length > 0 ? (
+      {shop.error.length > 0 ? (
         <Alert
-        message="Errors"
-        description={shop.error}
-        type="error"
-        showIcon
-        closable
-      />
-      ) : null}
-{/* 
-{shop.isSuccess && (
-        <Alert
-          message="Successfully!!!"
-          description="Your data have been saved"
-          type="success"
+          message="Errors"
+          description={shop.error}
+          type="error"
           showIcon
           closable
         />
-      )} */}
+      ) : null}
+
+      {shop.isSuccess && (
+        <Alert message="Successfully Deleted" type="success" showIcon />
+      )} 
 
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
@@ -147,6 +145,9 @@ const mapStateToProps = (store) => ({
   shop: store.shop
 });
 
-export default connect(mapStateToProps, { getShops, deleteShops, getShop })(
-  ShowShops
-);
+export default connect(mapStateToProps, {
+  getShops,
+  deleteShops,
+  getShop,
+  clearAlert
+})(ShowShops);

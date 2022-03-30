@@ -4,11 +4,14 @@ import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { editShops, getShop} from "../../store/actions";
+import { editShops, getShop, clearAlert} from "../../store/actions";
+import store from "../../store";
 import { connect } from "react-redux";
 
+
+
 const { Title } = Typography;
-const EditShops = ({ editShops,getShop }) => {
+const EditShops = ({ editShops,getShop, clearAlert }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const param = useParams();
@@ -25,7 +28,6 @@ const EditShops = ({ editShops,getShop }) => {
       fetchData();
     };
   }, [getShop]);
-
 
   useEffect(() => {
       form.setFieldsValue({ name: shop.name });
@@ -111,4 +113,4 @@ const EditShops = ({ editShops,getShop }) => {
   );
 };
 
-export default connect(null, { editShops, getShop })(EditShops);
+export default connect(null, { editShops, getShop, clearAlert })(EditShops);

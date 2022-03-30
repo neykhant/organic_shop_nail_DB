@@ -13,15 +13,13 @@ import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { connect, useDispatch } from "react-redux";
 import { saveShops, clearAlert } from "../../store/actions";
-import { useNavigate } from "react-router-dom";
 import store from "../../store";
 
 const { Title } = Typography;
 
 const CreateShops = ({ saveShops, shop, clearAlert }) => {
   const [form] = Form.useForm();
-  const navigate = useNavigate();
-  console.log(shop.isSuccess);
+  // console.log(shop.isSuccess);
 
   useEffect(() => {
     store.dispatch(clearAlert());

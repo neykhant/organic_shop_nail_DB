@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
+import { Typography, Space, Row, Col, Button, Table, notification, Alert } from "antd";
 import Layout from "antd/lib/layout/layout";
 import { PlusSquareOutlined, ExportOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { getMerchants, deleteMerchants, getMerchant } from "../../store/actions";
+import { getMerchants, deleteMerchants, getMerchant, clearAlertMerchant } from "../../store/actions";
+import store from "../../store";
+
+
 
 const { Title } = Typography;
 
-const ShowMerchants = ({ merchant, getMerchants, deleteMerchants, getMerchant }) => {
+const ShowMerchants = ({ merchant, getMerchants, deleteMerchants, getMerchant, clearAlertMerchant }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -20,21 +23,19 @@ const ShowMerchants = ({ merchant, getMerchants, deleteMerchants, getMerchant })
     };
   }, [getMerchants]);
 
+  // console.log(merchant.isSuccess)
+
+  useEffect(() => {
+    store.dispatch(clearAlertMerchant());
+  }, []);
+
   const handleClick =async (record) => {
     await getMerchant(record.id)
     navigate(`/admin/edit-merchants/${record.id}`);
   };
 
-  const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: 'Delete Your Data',
-      description: 'Your data have been deleted.',
-      duration: 3
-    });
-  };
   const handleDelete = async (record) => {
     await deleteMerchants(record.id);
-    openNotificationWithIcon('error')
   };
 
   const columns = [
@@ -72,6 +73,20 @@ const ShowMerchants = ({ merchant, getMerchants, deleteMerchants, getMerchant })
 
   return (
     <Layout style={{ margin: "20px" }}>
+      {merchant.error.length > 0 ? (
+        <Alert
+          message="Errors"
+          description={merchant.error}
+          type="error"
+          showIcon
+          closable
+        />
+      ) : null}
+
+      {merchant.isSuccess && (
+        <Alert message="Successfully Deleted" type="success" showIcon />
+      )}
+
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
           <Col span={16}>
@@ -120,6 +135,6 @@ const mapStateToProps = (store) => ({
   merchant: store.merchant
 });
 
-export default connect(mapStateToProps, { getMerchants, deleteMerchants, getMerchant })(
+export default connect(mapStateToProps, { getMerchants, deleteMerchants, getMerchant, clearAlertMerchant })(
   ShowMerchants
 );

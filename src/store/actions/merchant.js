@@ -5,7 +5,9 @@ import {
   CREATE_MERCHANTS,
   UPDATE_MERCHANTS,
   FILTER_MERCHANTS,
-  ERROR_ITEM
+  ERROR_MERCHANT,
+  IS_SUCCESS_MERCHANT,
+  CLEAR_ALERT
 } from "../type";
 
 export const showMerchants = (merchants) => ({
@@ -34,8 +36,17 @@ export const updateMerchants = (data) => ({
 });
 
 export const setMerchantError = (error) => ({
-  type: ERROR_ITEM,
+  type: ERROR_MERCHANT,
   error
+});
+
+export const clearAlertMerchant = () => ({
+  type: CLEAR_ALERT
+});
+
+export const merchantSuccess = (isSuccess) => ({
+  type: IS_SUCCESS_MERCHANT,
+  isSuccess
 });
 
 export const getMerchants = () => {
@@ -50,16 +61,14 @@ export const getMerchants = () => {
           key: merchant.id
         };
       });
-      // console.log(result)
-      // console.log(response.status)
       if (response.status === 200) {
         dispatch(showMerchants(result));
       }
     } catch (error) {
-      if (error.response.status === 404) {
-        dispatch(setMerchantError(error.response.data.data));
+      if (error.response.status >= 400) {
+        dispatch(setMerchantError("There was an error during Creating....!"));
       } else {
-        dispatch(setMerchantError(error.response.data));
+        dispatch(setMerchantError("There was an error during Creating....!"));
       }
     }
   };
@@ -98,15 +107,14 @@ export const saveMerchants = (data) => {
         ...response.data.data,
         key: response.data.data.id
       };
-      // console.log(result)
       if (response.status === 201) {
         dispatch(createMerchants(result));
       }
     } catch (error) {
-      if (error.response.status === 404) {
-        dispatch(setMerchantError(error.response.data.data));
+      if (error.response.status >= 400) {
+        dispatch(setMerchantError("There was an error during Creating....!"));
       } else {
-        dispatch(setMerchantError(error.response.data));
+        dispatch(setMerchantError("There was an error during Creating....!"));
       }
     }
   };
@@ -122,10 +130,10 @@ export const deleteMerchants = (id) => {
         dispatch(filterMerchants(id));
       }
     } catch (error) {
-      if (error.response.status === 404) {
-        dispatch(setMerchantError(error.response.data.data));
+      if (error.response.status >= 400) {
+        dispatch(setMerchantError("There was an error during Deleting....!"));
       } else {
-        dispatch(setMerchantError(error.response.data));
+        dispatch(setMerchantError("There was an error during Deleting....!"));
       }
     }
   };

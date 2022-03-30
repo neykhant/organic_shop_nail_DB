@@ -1,19 +1,40 @@
 import React, { useEffect } from "react";
-import { Form, Input, Typography, Space, Button, Select, notification } from "antd";
+import {
+  Form,
+  Input,
+  Typography,
+  Space,
+  Button,
+  Select,
+  notification,
+  Alert
+} from "antd";
 import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
-import { saveMerchants, getShops } from "../../store/actions";
+import {
+  saveMerchants,
+  getShops,
+  clearAlertMerchant
+} from "../../store/actions";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import store from "../../store";
 
 const { Title } = Typography;
 const { Option } = Select;
 
-const CreateMerchants = ({ saveMerchants, getShops }) => {
+const CreateMerchants = ({
+  saveMerchants,
+  getShops,
+  clearAlertMerchant,
+  merchant
+}) => {
   const [form] = Form.useForm();
   const shops = useSelector((state) => state.shop.shops);
   const navigate = useNavigate();
+
+  // console.log(merchant.isSuccess)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,22 +46,31 @@ const CreateMerchants = ({ saveMerchants, getShops }) => {
     };
   }, [getShops]);
 
-  const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: 'Saved Your Data',
-      description: 'Your data have been saved.',
-      duration: 3
-    });
-  };
+  useEffect(() => {
+    store.dispatch(clearAlertMerchant());
+  }, []);
+
   const onFinish = async (values) => {
-    await saveMerchants(values)
+    await saveMerchants(values);
     form.resetFields();
-    openNotificationWithIcon('success')
-    // navigate("/admin/show-merchants");
   };
 
   return (
     <Layout style={{ margin: "20px" }}>
+      {merchant.error.length > 0 ? (
+        <Alert
+          message="Errors"
+          description={merchant.error}
+          type="error"
+          showIcon
+          closable
+        />
+      ) : null}
+
+      {merchant.isSuccess && (
+        <Alert message="Successfully Created" type="success" showIcon />
+      )}
+
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
           ကုန်သည်အချက်အလက်သွင်းရန်စာမျက်နှာ
@@ -176,4 +206,12 @@ const CreateMerchants = ({ saveMerchants, getShops }) => {
   );
 };
 
-export default connect(null, { saveMerchants, getShops })(CreateMerchants);
+const mapStateToProps = (store) => ({
+  merchant: store.merchant
+});
+
+export default connect(mapStateToProps, {
+  saveMerchants,
+  getShops,
+  clearAlertMerchant
+})(CreateMerchants);

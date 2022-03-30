@@ -9,6 +9,7 @@ import {
   CLEAR_ALERT
 } from "../type";
 
+
 const initialState = {
   shops: [],
   shop: {},
@@ -35,7 +36,7 @@ const shop = (state = initialState, action) => {
       return {
         ...state,
         shop: action.shop,
-        error: [],
+        error: []
       };
     case FILTER_SHOPS:
       const filterShop = state.shops.filter((shop) => shop.id !== action.id);
@@ -43,6 +44,7 @@ const shop = (state = initialState, action) => {
         ...state,
         shops: filterShop,
         error: [],
+        isSuccess: true
       };
     case UPDATE_SHOPS:
       const updateShop = state.shops.map((shop) =>
@@ -51,25 +53,25 @@ const shop = (state = initialState, action) => {
       return {
         ...state,
         shops: updateShop,
-        error: [],
+        error: []
       };
     case ERROR_SHOP:
       return {
         ...state,
         error: action.error,
-        isSuccess: false,
+        isSuccess: false
       };
     case IS_SUCCESS_SHOP:
       return {
         ...state,
         isSuccess: action.isSuccess
       };
-      case CLEAR_ALERT:
+    case CLEAR_ALERT:
       return {
         ...state,
-        error: {},
-        isSuccess: false,
-      }
+        error: [],
+        isSuccess: false
+      };
     default:
       return state;
   }
