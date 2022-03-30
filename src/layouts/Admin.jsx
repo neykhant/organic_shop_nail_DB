@@ -456,6 +456,20 @@ const Admin = ({ logout }) => {
                 <Link to="/admin/report-screem">Report Screem</Link>
               </Menu.Item>
             </SubMenu>
+
+            <SubMenu
+              key="badItem"
+              title="BadItem"
+              icon={<UsergroupAddOutlined />}
+            >
+              <Menu.Item key="ShowBadItems" icon={<UnorderedListOutlined />}>
+                <Link to="/admin/show-bad-item">စာရင်း</Link>
+              </Menu.Item>
+              <Menu.Item key="CreateBadItem" icon={<SaveOutlined />}>
+                <Link to="/admin/create-bad-item">အသစ်ဖန်တီးရန်</Link>
+              </Menu.Item>
+            </SubMenu>
+
           </Menu>
         </Sider>
         <Layout>

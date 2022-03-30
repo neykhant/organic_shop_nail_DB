@@ -98,10 +98,7 @@ export const saveItems = (data) => {
         ...response.data.data,
         key: response.data.data.id
       };
-<<<<<<< HEAD
-=======
       // console.log(result)
->>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
       dispatch(createItems(result));
     } catch (error) {
       if (error) {

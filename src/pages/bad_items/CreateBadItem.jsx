@@ -91,6 +91,7 @@ const allStocks =stocks.map((stock) => {
     }
   };
 
+  
   const columns = [
     {
       title: "ပစ္စည်းအမည်/ကုတ်",
