@@ -14,13 +14,13 @@ import {
   Table,
   InputNumber,
   message,
-  Spin,
+  Spin
 } from "antd";
 import {
   PlusSquareOutlined,
   DeleteOutlined,
   SaveOutlined,
-  PrinterOutlined,
+  PrinterOutlined
 } from "@ant-design/icons";
 import Sider from "antd/lib/layout/Sider";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ import {
   getStocks,
   getServices,
   getStaffs,
-  getMembers,
+  getMembers
 } from "../store/actions";
 import { call } from "../services/api";
 
@@ -45,7 +45,7 @@ const Sale = ({
   staff,
   getStaffs,
   member,
-  getMembers,
+  getMembers
 }) => {
   const [sales, setSales] = useState([]);
   const [customerName, setCustomerName] = useState("");
@@ -56,6 +56,7 @@ const Sale = ({
   const [payMethod, setPayMethod] = useState();
   const [loading, setLoading] = useState(false);
   const [sale, setSale] = useState(null);
+  const [barcode, setBarcode] = useState([]);
 
   const navigate = useNavigate();
 
@@ -66,11 +67,16 @@ const Sale = ({
       await getStaffs();
       await getMembers();
     };
+
     fetchData();
     return () => {
       fetchData();
     };
   }, [getStocks, getServices, getStaffs, getMembers]);
+
+  useEffect(() => {
+    setBarcode(stock.stocks);
+  }, [stock.stocks]);
 
   const handleAddSaleItem = (stock) => {
     const index = sales.findIndex(
@@ -90,7 +96,7 @@ const Sale = ({
           quantity: 1,
           subtotal: stock.item.sale_price * 1,
           is_item: true,
-          staff_id: 1, // not need staff id for item. so, we need to change api
+          staff_id: 1 // not need staff id for item. so, we need to change api
         };
 
         setSales([...sales, sale]);
@@ -101,7 +107,7 @@ const Sale = ({
         cloneSales[index] = {
           ...cloneSales[index],
           quantity: cloneSales[index].quantity + 1,
-          subtotal: cloneSales[index].price * (cloneSales[index].quantity + 1),
+          subtotal: cloneSales[index].price * (cloneSales[index].quantity + 1)
         };
         setSales(cloneSales);
       }
@@ -124,7 +130,7 @@ const Sale = ({
         quantity: 1,
         subtotal: service.price * 1,
         is_item: false,
-        staff_id: undefined,
+        staff_id: undefined
       };
 
       setSales([...sales, sale]);
@@ -134,7 +140,7 @@ const Sale = ({
       cloneSales[index] = {
         ...cloneSales[index],
         quantity: cloneSales[index].quantity + 1,
-        subtotal: cloneSales[index].price * (cloneSales[index].quantity + 1),
+        subtotal: cloneSales[index].price * (cloneSales[index].quantity + 1)
       };
       setSales(cloneSales);
     }
@@ -146,7 +152,7 @@ const Sale = ({
       return {
         ...saleItem,
         id: index + 1,
-        key: index + 1,
+        key: index + 1
       };
     });
     setSales(transformSales);
@@ -159,7 +165,7 @@ const Sale = ({
     cloneSales[index] = {
       ...cloneSales[index],
       quantity: value,
-      subtotal: cloneSales[index].price * value,
+      subtotal: cloneSales[index].price * value
     };
     setSales(cloneSales);
   };
@@ -170,7 +176,7 @@ const Sale = ({
 
     cloneSales[index] = {
       ...cloneSales[index],
-      staff_id: value,
+      staff_id: value
     };
     setSales(cloneSales);
   };
@@ -215,7 +221,7 @@ const Sale = ({
             stock_id: sale.sale_id,
             staff_id: sale.staff_id,
             price: sale.price,
-            quantity: sale.quantity,
+            quantity: sale.quantity
           });
         }
       });
@@ -239,7 +245,7 @@ const Sale = ({
             service_id: sale.sale_id,
             staff_id: sale.staff_id,
             price: sale.price,
-            quantity: sale.quantity,
+            quantity: sale.quantity
           });
         }
       });
@@ -256,13 +262,13 @@ const Sale = ({
         paid: paid,
         payment_method: payMethod,
         customer_name: customerName,
-        customer_phone_no: customerPhone,
+        customer_phone_no: customerPhone
       };
 
       if (memberId !== undefined) {
         savedData = {
           ...savedData,
-          member_id: Number(memberId),
+          member_id: Number(memberId)
         };
       }
 
@@ -290,23 +296,42 @@ const Sale = ({
   };
 
   const handlePrint = () => {
-    if(sale){
+    if (sale) {
       navigate(`/admin/sale/${sale.id}`);
     }
-  }
+  };
+
+  // for barcode system
+  const [barcodeInputValue, updateBarcodeInputValue] = useState("");
+  const barcodeAutoFocus = () => {
+    document.getElementById("SearchbyScanning").focus();
+  };
+  const onChangeBarcode = (event) => {
+    updateBarcodeInputValue(event.target.value);
+  };
+
+  // console.log("b",barcode)
+  const handleSearch = () => {
+    // console.log("bv",barcodeInputValue)
+    const filterstocks = stock.stocks.filter(
+      (stock) => stock.item.code === barcodeInputValue
+    );
+    // console.log(filterstocks);
+    setBarcode(filterstocks);
+  };
 
   const columns = [
     {
       title: "စဥ်",
-      dataIndex: "id",
+      dataIndex: "id"
     },
     {
       title: "ကုတ်နံပါတ်",
-      dataIndex: "code",
+      dataIndex: "code"
     },
     {
       title: "ပစ္စည်း/ဝန်ဆောင်မှုအမည်",
-      dataIndex: "name",
+      dataIndex: "name"
     },
     {
       title: "ဝန်ထမ်းအမည်",
@@ -331,12 +356,12 @@ const Sale = ({
               </Option>
             ))}
           </Select>
-        ) : null,
+        ) : null
     },
     {
       title: "ဈေးနှုန်း",
       dataIndex: "price",
-      align: "right",
+      align: "right"
     },
     {
       title: "အရေအတွက်",
@@ -349,15 +374,15 @@ const Sale = ({
           style={{
             width: "100px",
             backgroundColor: "var(--white-color)",
-            color: "var(--black-color)",
+            color: "var(--black-color)"
           }}
         />
-      ),
+      )
     },
     {
       title: "ကျသင့်ငွေ",
       dataIndex: "subtotal",
-      align: "right",
+      align: "right"
     },
     {
       title: "",
@@ -366,8 +391,8 @@ const Sale = ({
         <Button type="primary" danger onClick={() => handleDelete(record)}>
           <DeleteOutlined />
         </Button>
-      ),
-    },
+      )
+    }
   ];
 
   return (
@@ -377,7 +402,7 @@ const Sale = ({
           style={{
             color: "var(--white-color)",
             textAlign: "center",
-            marginTop: "13px",
+            marginTop: "13px"
           }}
           level={3}
         >
@@ -389,13 +414,13 @@ const Sale = ({
           style={{
             marginBottom: "20px",
             backgroundColor: "var(--white-color)",
-            padding: "10px",
+            padding: "10px"
           }}
         >
           <Row gutter={[16, 16]}>
             <Col
               xl={{
-                span: 4,
+                span: 4
               }}
             >
               <Space>
@@ -403,16 +428,22 @@ const Sale = ({
                   style={{
                     backgroundColor: "var(--primary-color)",
                     padding: "10px",
-                    color: "var(--white-color)",
+                    color: "var(--white-color)"
                   }}
+                  onClick={handleSearch}
                 >
-                  Barcode
+                  Search
                 </Text>
-                <Input
-                  placeholder="Scan Item"
-                  size="large"
-                  style={{ width: "130px" }}
+                <input
+                  autoFocus={true}
+                  placeholder="Start Scanning"
+                  id="SearchbyScanning"
+                  className="SearchInput"
+                  value={barcodeInputValue}
+                  onChange={onChangeBarcode}
+                  onBlur={barcodeAutoFocus}
                 />
+                {/* <button >Search</button> */}
               </Space>
             </Col>
             <Col xl={{ span: 10 }}></Col>
@@ -422,7 +453,7 @@ const Sale = ({
                   style={{
                     backgroundColor: "var(--primary-color)",
                     padding: "10px",
-                    color: "var(--white-color)",
+                    color: "var(--white-color)"
                   }}
                 >
                   Member Name
@@ -453,7 +484,7 @@ const Sale = ({
               <Button
                 style={{
                   backgroundColor: "var(--primary-color)",
-                  color: "var(--white-color)",
+                  color: "var(--white-color)"
                 }}
                 size="large"
               >
@@ -476,7 +507,7 @@ const Sale = ({
                 textAlign: "center",
                 alignContent: "center",
                 alignItems: "center",
-                marginLeft: "33px",
+                marginLeft: "33px"
               }}
             >
               Product
@@ -489,7 +520,7 @@ const Sale = ({
                 paddingBottom: "10px",
                 paddingLeft: "45px",
                 color: "var(--white-color)",
-                marginLeft: "33px",
+                marginLeft: "33px"
               }}
             >
               Service
@@ -504,12 +535,12 @@ const Sale = ({
               backgroundColor: "var(--info-color)",
               padding: "20px",
               height: "520px",
-              overflow: "auto",
+              overflow: "auto"
             }}
           >
             <Row gutter={[12, 12]}>
               <Col span={12}>
-                {stock.stocks.map((stock) => (
+                {barcode.map((stock) => (
                   <Col key={stock.id}>
                     <Space
                       direction="vertical"
@@ -517,7 +548,7 @@ const Sale = ({
                         width: "100%",
                         alignItems: "center",
                         backgroundColor: "var(--white-color)",
-                        marginBottom: "12px",
+                        marginBottom: "12px"
                       }}
                       onClick={() => handleAddSaleItem(stock)}
                     >
@@ -525,7 +556,7 @@ const Sale = ({
                         style={{
                           backgroundColor: "var(--primary-color)",
                           color: "var(--white-color)",
-                          padding: "0 10px",
+                          padding: "0 10px"
                         }}
                       >
                         {stock.item.code}
@@ -552,7 +583,7 @@ const Sale = ({
                         width: "100%",
                         alignItems: "center",
                         backgroundColor: "var(--white-color)",
-                        marginBottom: "12px",
+                        marginBottom: "12px"
                       }}
                       onClick={() => handleAddSaleService(service)}
                     >
@@ -560,7 +591,7 @@ const Sale = ({
                         style={{
                           backgroundColor: "var(--primary-color)",
                           color: "var(--white-color)",
-                          padding: "0 10px",
+                          padding: "0 10px"
                         }}
                       >
                         {service.code}
@@ -582,7 +613,7 @@ const Sale = ({
           <Content
             style={{
               minHeight: "520px",
-              backgroundColor: "var(--muted-color)",
+              backgroundColor: "var(--muted-color)"
             }}
           >
             <Layout>
@@ -615,7 +646,7 @@ const Sale = ({
                     style={{
                       width: "100px",
                       backgroundColor: "var(--white-color)",
-                      color: "var(--black-color)",
+                      color: "var(--black-color)"
                     }}
                   />
                 </Col>
@@ -648,7 +679,7 @@ const Sale = ({
                       style={{
                         width: "100px",
                         backgroundColor: "var(--white-color)",
-                        color: "var(--black-color)",
+                        color: "var(--black-color)"
                       }}
                     />
                   </Title>
@@ -672,7 +703,7 @@ const Sale = ({
                       style={{
                         backgroundColor: "var(--primary-color)",
                         padding: "10px",
-                        color: "var(--white-color)",
+                        color: "var(--white-color)"
                       }}
                     >
                       ဝယ်ယူသူအမည်
@@ -691,7 +722,7 @@ const Sale = ({
                       style={{
                         backgroundColor: "var(--primary-color)",
                         padding: "10px",
-                        color: "var(--white-color)",
+                        color: "var(--white-color)"
                       }}
                     >
                       ဝယ်ယူသူဖုန်းနံပါတ်
@@ -711,7 +742,7 @@ const Sale = ({
                       style={{
                         backgroundColor: "var(--primary-color)",
                         padding: "10px",
-                        color: "var(--white-color)",
+                        color: "var(--white-color)"
                       }}
                     >
                       ငွေချေရမည့်နည်းလမ်း
@@ -744,7 +775,7 @@ const Sale = ({
                   <Button
                     style={{
                       backgroundColor: "var(--primary-color)",
-                      color: "var(--white-color)",
+                      color: "var(--white-color)"
                     }}
                     size="large"
                     onClick={handleSavedSale}
@@ -758,7 +789,7 @@ const Sale = ({
                   <Button
                     style={{
                       backgroundColor: "var(--primary-color)",
-                      color: "var(--white-color)",
+                      color: "var(--white-color)"
                     }}
                     size="large"
                     onClick={handlePrint}
@@ -780,12 +811,12 @@ const mapStateToProps = (store) => ({
   stock: store.stock,
   service: store.service,
   staff: store.staff,
-  member: store.member,
+  member: store.member
 });
 
 export default connect(mapStateToProps, {
   getStocks,
   getServices,
   getStaffs,
-  getMembers,
+  getMembers
 })(Sale);

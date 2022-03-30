@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Typography, Space, Button, InputNumber, Select, notification } from "antd";
 import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
@@ -39,6 +39,15 @@ const CreateMembers = ({ shop, saveMembers, getShops}) => {
     // navigate("/admin/show-members");
   };
 
+  //for barcode
+  const [barcodeInputValue, updateBarcodeInputValue] = useState("");
+  const barcodeAutoFocus = () => {
+    document.getElementById("SearchbyScanning").focus();
+  };
+  const onChangeBarcode = (event) => {
+    updateBarcodeInputValue(event.target.value);
+  };
+
   return (
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
@@ -71,11 +80,23 @@ const CreateMembers = ({ shop, saveMembers, getShops}) => {
             ]}
           >
             <Input
+              id="SearchbyScanning"
+              className="SearchInput"
+              value={barcodeInputValue}
+              onChange={onChangeBarcode}
+             
+              placeholder="မန်ဘာကုတ်ထည့်ပါ"
+              prefix={<EditOutlined />}
+              style={{ borderRadius: "10px" }}
+              size="large"
+            />
+
+            {/* <Input
               placeholder="မန်ဘာကုတ်ထည့်ပါ"
               prefix={<EditOutlined />}
               style={{ borderRadius: "10px", width: "100%" }}
               size="large"
-            />
+            /> */}
           </Form.Item>
           <Form.Item
             name="name"

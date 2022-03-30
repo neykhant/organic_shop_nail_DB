@@ -83,11 +83,14 @@ const CreateItems = ({ saveItems, error }) => {
   const onChangeBarcode = (event) => {
     updateBarcodeInputValue(event.target.value);
   };
+<<<<<<< HEAD
   const handleSearch = () => {
     alert(barcodeInputValue);
     updateBarcodeInputValue("");
     document.getElementById("SearchbyScanning").focus();
   };
+=======
+>>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
 
   const columns = [
     {
@@ -135,7 +138,11 @@ const CreateItems = ({ saveItems, error }) => {
         <Title style={{ textAlign: "center" }} level={3}>
           ပစ္စည်းအချက်အလက်သွင်းရန်စာမျက်နှာ
         </Title>
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
         <Form
           labelCol={{
             xl: {
@@ -167,6 +174,7 @@ const CreateItems = ({ saveItems, error }) => {
             <Text type="secondary">ကျေးဇူးပြု၍ပစ္စည်းပုံထည့်ပါ</Text>
           </Space>
 
+<<<<<<< HEAD
           <div className="App">
          <label htmlFor="">ပစ္စည်းကုတ်</label>
           <input
@@ -182,6 +190,9 @@ const CreateItems = ({ saveItems, error }) => {
         </div>
         
           {/* <Form.Item
+=======
+          <Form.Item
+>>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
             name="code"
             label="ပစ္စည်းကုတ်"
             rules={[
@@ -193,22 +204,34 @@ const CreateItems = ({ saveItems, error }) => {
             labelwidth={100}
           >
             <Input
+<<<<<<< HEAD
               autoFocus={true}
               // placeholder="Start Scanning"
+=======
+>>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
               id="SearchbyScanning"
               className="SearchInput"
               value={barcodeInputValue}
               onChange={onChangeBarcode}
+<<<<<<< HEAD
               onBlur={barcodeAutoFocus}
 
 
+=======
+             
+>>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
               placeholder="ပစ္စည်းကုတ်ထည့်ပါ"
               prefix={<EditOutlined />}
               style={{ borderRadius: "10px" }}
               size="large"
             />
+<<<<<<< HEAD
             <button onClick={handleSearch}>Search</button>
           </Form.Item> */}
+=======
+          </Form.Item>
+
+>>>>>>> e868fd99ea19bdb2c4c1161b950cbba10505ec9d
 
           <Form.Item
             name="name"
