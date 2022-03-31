@@ -304,9 +304,6 @@ const Sale = ({
 
   // for barcode system
   const [barcodeInputValue, updateBarcodeInputValue] = useState("");
-  const barcodeAutoFocus = () => {
-    document.getElementById("SearchbyScanning").focus();
-  };
 
   const onChangeBarcode = (event) => {
     updateBarcodeInputValue(event.target.value);
@@ -455,17 +452,14 @@ const Sale = ({
                 >
                   Search
                 </Text>
-                <input
-                  // autoFocus={false}
+                <Input
                   placeholder="Start Scanning"
                   id="SearchbyScanning"
                   className="SearchInput"
                   value={barcodeInputValue}
                   onChange={onChangeBarcode}
                   onKeyDown={onKeyDown}
-                  onBlur={barcodeAutoFocus}
                 />
-                {/* <button >Search</button> */}
               </Space>
             </Col>
             <Col xl={{ span: 10 }}></Col>

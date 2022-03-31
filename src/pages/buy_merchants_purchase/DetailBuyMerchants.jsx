@@ -44,7 +44,7 @@ const DetailBuyMerchants = ({ getPurchase, purchase }) => {
   const columns = [
     {
       title: "ရက်စွဲ",
-      dataIndex: `created_at`
+      dataIndex: 'date'
     },
     {
       title: "ကုန်သည်လုပ်ငန်းအမည်"

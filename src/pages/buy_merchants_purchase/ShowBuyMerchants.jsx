@@ -108,7 +108,7 @@ const ShowBuyMerchants = ({
   const handleDetail = async (record) => {
     console.log(record.credit);
     // await getPurchase(record.id);
-    // navigate(`/admin/detail-buy-merchants/${record.id}`);
+    navigate(`/admin/detail-buy-merchants/${record.id}`);
   };
 
   const columns = [
@@ -133,7 +133,6 @@ const ShowBuyMerchants = ({
       title: "ပေးရန်ကျန်ငွေ",
       dataIndex: "credit"
     },
-
     {
       title: "Actions",
       dataIndex: "action",
