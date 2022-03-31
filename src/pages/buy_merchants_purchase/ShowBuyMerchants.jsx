@@ -106,9 +106,9 @@ const ShowBuyMerchants = ({
   };
 
   const handleDetail = async (record) => {
-    console.log(record.credit);
+    console.log(record.id);
     // await getPurchase(record.id);
-    navigate(`/admin/detail-buy-merchants/${record.id}`);
+    navigate(`/admin/show-purchase/${record.id}`);
   };
 
   const columns = [

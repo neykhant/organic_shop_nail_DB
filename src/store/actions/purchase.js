@@ -49,7 +49,6 @@ export const getPurchase = (id) => {
       if (response.status === 200) {
         dispatch(showPurchase(result));
       }
-      // console.log(result)
     } catch (error) {
       if (error.response.status === 404) {
         dispatch(setPurchaseErrors(error.response.data.data));

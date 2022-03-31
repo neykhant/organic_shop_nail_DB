@@ -19,7 +19,6 @@ const { Title } = Typography;
 
 const CreateShops = ({ saveShops, shop, clearAlert }) => {
   const [form] = Form.useForm();
-  // console.log(shop.isSuccess);
 
   useEffect(() => {
     store.dispatch(clearAlert());
@@ -28,8 +27,6 @@ const CreateShops = ({ saveShops, shop, clearAlert }) => {
   const onFinish = async (values) => {
     await saveShops(values);
     form.resetFields();
-    // openNotificationWithIcon("success");
-    // navigate("/admin/show-shops");
   };
 
   return (

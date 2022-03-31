@@ -84,7 +84,7 @@ import EditExpenseNames from "../pages/expense_names/EditExpenseNames";
 import EditMerchants from "../pages/merchants/EditMerchants";
 import EditExpenses from "../pages/expenses/EditExpenses";
 import EditBuyMerchants from "../pages/buy_merchants_purchase/EditBuyMerchants";
-import DetailBuyMerchants from "../pages/buy_merchants_purchase/DetailBuyMerchants";
+import ShowPurchases from "../pages/buy_merchants_purchase/ShowPurchases";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -534,8 +534,8 @@ const Admin = ({ logout }) => {
                 element={<EditBuyMerchants />}
               />
               <Route
-                path="detail-buy-merchants/:id"
-                element={<DetailBuyMerchants />}
+                path="show-purchase/:id"
+                element={<ShowPurchases />}
               />
 
               <Route path="create-expenses" element={<CreateExpenses />} />

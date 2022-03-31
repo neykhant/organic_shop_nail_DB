@@ -36,7 +36,6 @@ const CreateMembers = ({ shop, saveMembers, getShops}) => {
     await saveMembers(values)
     form.resetFields();
     openNotificationWithIcon('success')
-    // navigate("/admin/show-members");
   };
 
   //for barcode

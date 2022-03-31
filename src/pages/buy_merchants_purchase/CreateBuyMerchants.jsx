@@ -72,7 +72,6 @@ const CreateBuyMerchants = ({ item, merchant, getMerchants, getItems, savePurcha
     ]);
     form.resetFields();
   };
-// console.log("dd",buys )
 
   let allTotal = [];
   buys.forEach((buy) => allTotal.push(parseInt(buy.subtotal)));
@@ -129,16 +128,10 @@ const CreateBuyMerchants = ({ item, merchant, getMerchants, getItems, savePurcha
       };
       await savePurchases(saveBuy)
       openNotificationWithIcon('success')
-  // console.log("save", saveBuy)
 
     }
     navigate("/admin/show-buy-merchants");
   };
-
-  // const buyTotal =
-  //   buys.length > 0
-  //     ? buys.map((buy) => buy.subtotal).reduce((a, b) => a + b)
-  //     : 0;
 
   const handlePayment = (value) => {
     setCredit(result - value);
@@ -177,7 +170,6 @@ const CreateBuyMerchants = ({ item, merchant, getMerchants, getItems, savePurcha
     },
   ];
 
-  //  console.log(merchant.merchants)
   return (
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
@@ -211,7 +203,6 @@ const CreateBuyMerchants = ({ item, merchant, getMerchants, getItems, savePurcha
                 {mer.name}
               </Option>
             ))}
-            {/* <Option>{buyMerchant === null ? "-" : buyMerchant.company_name}</Option> */}
           </Select>
         </Space>
         <Space
