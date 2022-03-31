@@ -111,4 +111,6 @@ export const FILTER_VOUCHERS = 'FILTER_VOUCHERS';
 
 export const SHOW_STOCKS = 'SHOW_STOCKS';
 
+export const SET_REPORTS = 'SET_REPORTS';
+
 

@@ -18,3 +18,4 @@ export * from "./stock.js";
 export * from "./bad_item.js";
 export * from "./owner.js";
 export * from "./voucher.js";
+export * from "./report.js";

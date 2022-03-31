@@ -16,6 +16,7 @@ import stock from "./stock";
 import bad_item from "./bad_item";
 import owner from "./owner";
 import voucher from "./voucher";
+import report from "./report";
 
 
 const reducers = combineReducers({
@@ -36,6 +37,7 @@ const reducers = combineReducers({
   bad_item,
   owner,
   voucher,
+  report,
 });
 
 export default reducers;
