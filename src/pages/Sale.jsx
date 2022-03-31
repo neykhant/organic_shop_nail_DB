@@ -307,37 +307,39 @@ const Sale = ({
   const barcodeAutoFocus = () => {
     document.getElementById("SearchbyScanning").focus();
   };
+
   const onChangeBarcode = (event) => {
     updateBarcodeInputValue(event.target.value);
   };
 
-  // console.log("b",barcode)
   const handleSearch = () => {
-    // console.log("bv",barcodeInputValue)
     const filterstocks = stock.stocks.filter(
       (stock) => stock.item.code === barcodeInputValue
     );
-    // console.log(filterstocks);
     setBarcode(filterstocks);
   };
+  // console.log(stock)
 
-  const onKeyDown=(e)=>{
-    if (e.keyCode===13){
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13) {
       updateBarcodeInputValue(e.target.value);
-    
-      const item=stock.stocks.find((s)=>s.item.code===e.target.value);
-      if (item) handleAddSaleItem(item);
-      else {
-        const item=service.services.find((s)=>s.code===e.target.value);
-        if (item){
+
+      const item = stock.stocks.find((s) => s.item.code === e.target.value);
+
+      if (item) {
+        handleAddSaleItem(item);
+        updateBarcodeInputValue("");
+      } else {
+        const item = service.services.find((s) => s.code === e.target.value);
+        if (item) {
           handleAddSaleService(item);
-        }
-        else {
+          updateBarcodeInputValue("");
+        } else {
           alert("Not Found");
         }
       }
     }
-  }
+  };
 
   const columns = [
     {
@@ -454,7 +456,7 @@ const Sale = ({
                   Search
                 </Text>
                 <input
-                  autoFocus={true}
+                  // autoFocus={false}
                   placeholder="Start Scanning"
                   id="SearchbyScanning"
                   className="SearchInput"

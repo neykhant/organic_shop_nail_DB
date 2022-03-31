@@ -5,7 +5,7 @@ import {
   Route,
   useLocation,
   Navigate,
-  useNavigate,
+  useNavigate
 } from "react-router-dom";
 // ant design styles
 import { Layout, Menu, Avatar, Space, Popover, Button } from "antd";
@@ -27,7 +27,7 @@ import {
   FileImageOutlined,
   ContactsOutlined,
   FolderAddOutlined,
-  FlagOutlined,
+  FlagOutlined
 } from "@ant-design/icons";
 import Dashboard from "../pages/Dashboard";
 import SubMenu from "antd/lib/menu/SubMenu";
@@ -84,6 +84,7 @@ import EditExpenseNames from "../pages/expense_names/EditExpenseNames";
 import EditMerchants from "../pages/merchants/EditMerchants";
 import EditExpenses from "../pages/expenses/EditExpenses";
 import EditBuyMerchants from "../pages/buy_merchants_purchase/EditBuyMerchants";
+import DetailBuyMerchants from "../pages/buy_merchants_purchase/DetailBuyMerchants";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -101,7 +102,6 @@ const Admin = ({ logout }) => {
 
   const handleLogout = () => {
     logout();
-    // localStorage.removeItem("jwtToken")
     navigate("/auth/login", { replace: true });
   };
 
@@ -270,7 +270,7 @@ const Admin = ({ logout }) => {
             float: "left",
             backgroundColor: "var(--primary-color)",
             color: "var(--white-color)",
-            marginRight: "3px",
+            marginRight: "3px"
           }}
         >
           {React.createElement(
@@ -410,7 +410,6 @@ const Admin = ({ logout }) => {
               </Menu.Item>
             </SubMenu>
 
-            
             <SubMenu
               key="Owner"
               title="ပစ္စည်းထုတ်သုံးခြင်"
@@ -487,7 +486,10 @@ const Admin = ({ logout }) => {
                 element={<CreateItemTransfer />}
               />
               <Route path="show-item-transfer" element={<ShowItemTransfer />} />
-              <Route path="edit-item-transfer/:id" element={<ShowItemTransfer />} />
+              <Route
+                path="edit-item-transfer/:id"
+                element={<ShowItemTransfer />}
+              />
               <Route
                 path="show-item-change-list"
                 element={<ShowItemChangeList />}
@@ -527,7 +529,15 @@ const Admin = ({ logout }) => {
                 element={<CreateBuyMerchants />}
               />
               <Route path="show-buy-merchants" element={<ShowBuyMerchants />} />
-              <Route path="edit-buy-merchants/:id" element={<EditBuyMerchants />} />
+              <Route
+                path="edit-buy-merchants/:id"
+                element={<EditBuyMerchants />}
+              />
+              <Route
+                path="detail-buy-merchants/:id"
+                element={<DetailBuyMerchants />}
+              />
+
               <Route path="create-expenses" element={<CreateExpenses />} />
               <Route path="show-expenses" element={<ShowExpenses />} />
               <Route path="edit-expenses/:id" element={<EditExpenses />} />
@@ -553,7 +563,7 @@ const Admin = ({ logout }) => {
               backgroundColor: "var(--white-color)",
               textAlign: "center",
               fontWeight: "bold",
-              color: "var(--primary-color)",
+              color: "var(--primary-color)"
             }}
           >
             DEVELOP BY RCS
