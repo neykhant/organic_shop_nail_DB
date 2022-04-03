@@ -19,7 +19,12 @@ import {
 } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
-import { saveItemTransfers, getShops, getItems, getStocks } from "../../store/actions";
+import {
+  saveItemTransfers,
+  getShops,
+  getItems,
+  getStocks,
+} from "../../store/actions";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -41,7 +46,6 @@ const CreateItemTransfer = ({
   const user = useSelector((state) => state.auth.user);
 
   const stocks = useSelector((state) => state.stock.stocks);
-  // console.log(AllItems);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,9 +56,7 @@ const CreateItemTransfer = ({
     return () => {
       fetchData();
     };
-  }, [getShops,getStocks]);
-
- 
+  }, [getShops, getStocks]);
 
   var today = new Date(),
     date =
@@ -65,11 +67,30 @@ const CreateItemTransfer = ({
       today.getDate();
 
   const onFinish = (values) => {
-    setItems([...items, { ...values, Date: date, key: items.length + 1 }]);
-    form.resetFields();
-  };
+    const stock = stocks.find((stock) => stock.id === values.stock_id);
+    const addedTransfer = items.find(
+      (item) => item.stock_id === values.stock_id
+    );
 
-  // console.log("first", items);
+    if (addedTransfer === undefined) {
+      if (stock.quantity >= values.quantity) {
+        setItems([
+          ...items,
+          {
+            ...values,
+            Date: date,
+            key: items.length + 1,
+            name: stock.item.name,
+          },
+        ]);
+        form.resetFields();
+      } else {
+        message.error("လက်ကျန်အရေအတွက်ထက်များနေပါသည်။");
+      }
+    } else {
+      message.error("ထည့်ပြီးသောပစ္စည်းဖြစ်နေပါသည်။");
+    }
+  };
 
   const onChange = (value) => {
     if (value === undefined) {
@@ -104,7 +125,6 @@ const CreateItemTransfer = ({
         item_transfers: itemTransfer,
         to_shop_id: buyShop.id,
       };
-      // console.log(saveItem)
       await saveItemTransfers(saveItem);
       setItems([]);
       setBuyShop(null);
@@ -113,7 +133,6 @@ const CreateItemTransfer = ({
   };
 
   const handleDelete = (record) => {
-    console.log(record.key);
     const filter = items.filter((item) => item.key !== record.key);
     setItems(filter);
   };
@@ -121,12 +140,8 @@ const CreateItemTransfer = ({
   const columns = [
     {
       title: "ပစ္စည်းအမည်",
-      dataIndex: "stock_id",
+      dataIndex: "name",
     },
-    // {
-    //   title: "ပစ္စည်:ကုတ်",
-    //   dataIndex: "item_code",
-    // },
     {
       title: "အရေအတွက်",
       dataIndex: "quantity",
@@ -146,7 +161,7 @@ const CreateItemTransfer = ({
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ပစ္စည်းလွှဲပြောင်းရန်စာမျက်နှာ 
+          ပစ္စည်းလွှဲပြောင်းရန်စာမျက်နှာ
         </Title>
         <Space
           direction="horizontal"
@@ -171,12 +186,12 @@ const CreateItemTransfer = ({
             style={{ borderRadius: "10px" }}
           >
             {shops.map((shop) => {
-              if (shop.id!==parseInt(user?.shop?.id))
-              return (
-                <Option key={shop.id} value={shop.id}>
-                  {shop.name}
-                </Option>
-              );
+              if (shop.id !== parseInt(user?.shop?.id))
+                return (
+                  <Option key={shop.id} value={shop.id}>
+                    {shop.name}
+                  </Option>
+                );
             })}
           </Select>
         </Space>
@@ -286,6 +301,9 @@ const CreateItemTransfer = ({
   );
 };
 
-export default connect(null, { getShops, getItems, saveItemTransfers,getStocks })(
-  CreateItemTransfer
-);
+export default connect(null, {
+  getShops,
+  getItems,
+  saveItemTransfers,
+  getStocks,
+})(CreateItemTransfer);

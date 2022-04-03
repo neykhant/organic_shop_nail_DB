@@ -32,6 +32,7 @@ const CreateBadItem = ({ getStocks, saveBadItems, clearAlert, bad_item }) => {
     return {
       id: stock.id,
       name: stock.item.name,
+      quantity: stock.quantity,
     };
   });
 
@@ -48,23 +49,32 @@ const CreateBadItem = ({ getStocks, saveBadItems, clearAlert, bad_item }) => {
     };
   }, [getStocks]);
 
-
   useEffect(() => {
     store.dispatch(clearAlert());
   }, []);
 
   const onFinish = (values) => {
     const stock = allStocks.find((stock) => stock.id === values.stock_id);
-    setBads([
-      ...bads,
-      {
-        ...values,
-        name: stock.name,
-        date: dateFormat(now, "yyyy-mm-dd"),
-        key: bads.length + 1,
-      },
-    ]);
-    form.resetFields();
+    const addedBadItem = bads.find((item) => item.stock_id === values.stock_id);
+
+    if (addedBadItem === undefined) {
+      if (stock.quantity >= values.quantity) {
+        setBads([
+          ...bads,
+          {
+            ...values,
+            name: stock.name,
+            date: dateFormat(now, "yyyy-mm-dd"),
+            key: bads.length + 1,
+          },
+        ]);
+        form.resetFields();
+      } else {
+        message.error("လက်ကျန်အရေအတွက်ထက်များနေပါသည်။");
+      }
+    } else {
+      message.error("ထည့်ပြီးသောပစ္စည်းဖြစ်နေပါသည်။");
+    }
   };
 
   const handleDelete = (record) => {
@@ -178,7 +188,7 @@ const CreateBadItem = ({ getStocks, saveBadItems, clearAlert, bad_item }) => {
             >
               {allStocks.map((stock) => (
                 <Option key={stock.id} value={stock.id}>
-                  {stock.name}
+                  {stock.name} ({stock.quantity})
                 </Option>
               ))}
             </Select>
@@ -253,9 +263,12 @@ const CreateBadItem = ({ getStocks, saveBadItems, clearAlert, bad_item }) => {
   );
 };
 
-
 const mapStateToProps = (store) => ({
-  bad_item: store.bad_item
+  bad_item: store.bad_item,
 });
 
-export default connect(mapStateToProps, { saveBadItems, getStocks, clearAlert })(CreateBadItem);
+export default connect(mapStateToProps, {
+  saveBadItems,
+  getStocks,
+  clearAlert,
+})(CreateBadItem);
