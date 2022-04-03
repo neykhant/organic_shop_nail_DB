@@ -452,7 +452,7 @@ const Admin = ({ logout }) => {
                 <Link to="/admin/service-report">Service</Link>
               </Menu.Item>
               <Menu.Item key="ReportScreem" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/report-screem">Report Screem</Link>
+                <Link to="/admin/report-screem">Report Screen</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>

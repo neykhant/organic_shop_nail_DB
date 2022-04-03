@@ -4,32 +4,32 @@ import {
   CREATE_STAFFS,
   UPDATE_STAFFS,
   FILTER_STAFFS,
-  ERROR_STAFFS
+  ERROR_STAFFS,
 } from "../type";
 
 export const showStaffs = (staffs) => ({
   type: SHOW_STAFFS,
-  staffs
+  staffs,
 });
 
 export const createStaffs = (staff) => ({
   type: CREATE_STAFFS,
-  staff
+  staff,
 });
 
 export const filterStaffs = (id) => ({
   type: FILTER_STAFFS,
-  id
+  id,
 });
 
 export const updateStaffs = (data) => ({
   type: UPDATE_STAFFS,
-  data
+  data,
 });
 
 export const setStaffErrors = (error) => ({
   type: ERROR_STAFFS,
-  error
+  error,
 });
 
 export const getStaffs = () => {
@@ -41,7 +41,7 @@ export const getStaffs = () => {
       const result = response.data.data.map((item) => {
         return {
           ...item,
-          key: item.id
+          key: item.id,
         };
       });
       // console.log(response.status)
@@ -102,7 +102,7 @@ export const editStaffs = (id, data) => {
         `http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/staffs/${id}?_method=put`,
         data
       );
-    //   console.log(response);
+      //   console.log(response);
       const result = response.data.data;
       if (response.status === 204) {
         dispatch(updateStaffs(result));
@@ -114,6 +114,33 @@ export const editStaffs = (id, data) => {
       // } else {
       //   dispatch(setStaffErrors(error.response.data));
       // }
+    }
+  };
+};
+
+export const getStaffReport = (query) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/staffReport?${new URLSearchParams(
+          query
+        ).toString()}`
+      );
+      const result = response.data.map((report) => {
+        return {
+          ...report,
+          key: report.id,
+        };
+      });
+      if (response.status === 200) {
+        dispatch(showStaffs(result));
+      }
+    } catch (error) {
+      if (error.response.status === 404) {
+        dispatch(setStaffErrors(error.response.data.data));
+      } else {
+        dispatch(setStaffErrors(error.response.data));
+      }
     }
   };
 };
