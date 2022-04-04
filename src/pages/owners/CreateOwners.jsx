@@ -7,7 +7,8 @@ import {
   Button,
   InputNumber,
   Select,
-  notification
+  notification,
+  message,
 } from "antd";
 import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
@@ -26,7 +27,7 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
   const [form] = Form.useForm();
   const now = new Date();
   const date = dateFormat(now, "yyyy-mm-dd");
-  
+
   useEffect(() => {
     const fetchData = async () => {
       await getStocks();
@@ -41,7 +42,8 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
   const allStocks = stocks.map((stock) => {
     return {
       id: stock.id,
-      name: stock.item.name
+      name: stock.item.name,
+      quantity: stock.quantity,
     };
   });
 
@@ -49,31 +51,26 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
     notification[type]({
       message: "Saved Your Data",
       description: "Your data have been saved.",
-      duration: 3
+      duration: 3,
     });
   };
 
   const onFinish = async (values) => {
-    const item=stocks.find(s=>s.id===values.stock_id);
-    if (values.quantity>item.quantity){
-      notification["error"]({
-        message: "Error",
-        description: "Quantity is greater than stock",
-        duration: 3
-      });
-      return ;
+    const stock = allStocks.find((stock) => stock.id === values.stock_id);
+    if (stock.quantity >= values.quantity) {
+      const data = {
+        date: date,
+        // id: stocks[stocks.length - 1].id + 1,
+        // key: stocks[stocks.length - 1].id + 1,
+        ...values,
+      };
+      await saveOwners(data);
+      openNotificationWithIcon("success");
+      form.resetFields();
+      // navigate("/admin/show-owner");
+    } else {
+      message.error("လက်ကျန်အရေအတွက်ထက်များနေပါသည်။");
     }
-  
-    const data = {
-      date: date,
-      // id: stocks[stocks.length - 1].id + 1,
-      // key: stocks[stocks.length - 1].id + 1,
-      ...values
-    };
-    await saveOwners(data);
-    openNotificationWithIcon("success");
-    form.resetFields();
-    // navigate("/admin/show-owner");
   };
 
   return (
@@ -85,14 +82,14 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
         <Form
           labelCol={{
             xl: {
-              span: 3
-            }
+              span: 3,
+            },
           }}
           wrapperCol={{
-            span: 24
+            span: 24,
           }}
           initialValues={{
-            remember: true
+            remember: true,
           }}
           onFinish={onFinish}
           form={form}
@@ -102,7 +99,7 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
             style={{
               width: "100%",
               alignItems: "center",
-              marginBottom: "10px"
+              marginBottom: "10px",
             }}
           ></Space>
 
@@ -112,8 +109,8 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
             rules={[
               {
                 required: true,
-                message: "ကျေးဇူးပြု၍ ပစ္စည်းကုတ်/အမည်ထည့်ပါ"
-              }
+                message: "ကျေးဇူးပြု၍ ပစ္စည်းကုတ်/အမည်ထည့်ပါ",
+              },
             ]}
           >
             <Select
@@ -129,7 +126,7 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
             >
               {allStocks.map((stock) => (
                 <Option key={stock.id} value={stock.id}>
-                  {stock.name}
+                  {stock.name} ({stock.quantity})
                 </Option>
               ))}
             </Select>
@@ -141,8 +138,8 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
             rules={[
               {
                 required: true,
-                message: "ကျေးဇူးပြု၍ အရေအတွက်ထည့်ပါ"
-              }
+                message: "ကျေးဇူးပြု၍ အရေအတွက်ထည့်ပါ",
+              },
             ]}
           >
             <InputNumber
@@ -158,7 +155,7 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
               style={{
                 backgroundColor: "var(--primary-color)",
                 color: "var(--white-color)",
-                borderRadius: "10px"
+                borderRadius: "10px",
               }}
               size="large"
               htmlType="submit"

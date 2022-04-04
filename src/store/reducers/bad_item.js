@@ -18,7 +18,7 @@ const item = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_BADITEMS:
       return {
-        bad_items: [...state.bad_items, action.baditem],
+        // bad_items: [...state.bad_items, action.baditem],
         isSuccess: true,
         error: ""
       };
