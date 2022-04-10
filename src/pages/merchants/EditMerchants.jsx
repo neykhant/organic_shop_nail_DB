@@ -35,7 +35,7 @@ const EditMerchants = ({ editMerchants, getShops, getMerchant }) => {
   }, [merchant]);
 
   const onFinish = async (values) => {
-    await editMerchants(param?.id, values)
+    await editMerchants(param?.id, values);
     form.resetFields();
     navigate("/admin/show-merchants");
   };
@@ -44,7 +44,7 @@ const EditMerchants = ({ editMerchants, getShops, getMerchant }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ကုန်သည်အချက်အလက်သွင်းရန်စာမျက်နှာ
+          ကုန်သည်အချက်အလက်ပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Form
           labelCol={{

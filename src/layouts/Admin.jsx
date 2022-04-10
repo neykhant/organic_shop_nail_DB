@@ -88,6 +88,7 @@ import EditBuyMerchants from "../pages/buy_merchants_purchase/EditBuyMerchants";
 import ShowPurchases from "../pages/buy_merchants_purchase/ShowPurchases";
 import EditBadItem from "../pages/bad_items/EditBadItem";
 import ChangePassword from "../pages/change_password/ChangePassword";
+import PurchaseReport from "../pages/reports/PurchaseReport";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -260,6 +261,9 @@ const Admin = ({ logout }) => {
     case "/admin/report-screem":
       selectedKey = "ReportScreem";
       break;
+    case "/admin/purchase-report":
+      selectedKey = "PurchaseReport";
+      break;
     //end start
     default:
       selectedKey = "Dashboard";
@@ -310,7 +314,7 @@ const Admin = ({ logout }) => {
               <Link to="/admin/dashboard">Dashboard</Link>
             </Menu.Item>
             <Menu.Item key="Sale" icon={<ShopOutlined />}>
-              <Link to="/admin/sale">Sale</Link>
+              <Link to="/admin/sale">Sale Screen</Link>
             </Menu.Item>
             <Menu.Item key="ChangePassword" icon={<LockOutlined />}>
               <Link to="/admin/change-password">Change Password</Link>
@@ -374,21 +378,19 @@ const Admin = ({ logout }) => {
                 key="ShowBuyMerchants"
                 icon={<UnorderedListOutlined />}
               >
-                <Link to="/admin/show-buy-merchants">ပစ္စည်းအဝယ်သွင်းရန်</Link>
+                <Link to="/admin/show-buy-merchants">အဝယ်သွင်းရန်</Link>
               </Menu.Item>
               <Menu.Item
                 key="ShowItemTransfer"
                 icon={<UnorderedListOutlined />}
               >
-                <Link to="/admin/show-item-transfer">
-                  ပစ္စည်းလွှဲပြောင်းရန်
-                </Link>
+                <Link to="/admin/show-item-transfer">လွှဲပြောင်းရန်</Link>
               </Menu.Item>
               <Menu.Item key="ShowOwner" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-owner">ပစ္စည်းထုတ်သုံးခြင်:</Link>
+                <Link to="/admin/show-owner">ထုတ်သုံးခြင်:</Link>
               </Menu.Item>
               <Menu.Item key="CreateBadItems" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-bad-item">ချို့ယွင်းချက်ရှိပစ္စည်း</Link>
+                <Link to="/admin/show-bad-item">ချို့ယွင်းချက်ရှိ</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -402,25 +404,28 @@ const Admin = ({ logout }) => {
               </Menu.Item>
             </SubMenu>
             {(user?.position === "owner" || user?.position === "manager") && (
-            <SubMenu
-              key="Staff"
-              title="ဝန်ထမ်းစာရင်း"
-              icon={<ContactsOutlined />}
-            >
-              <Menu.Item key="CreateStaff" icon={<SaveOutlined />}>
-                <Link to="/admin/create-staff">ဝန်ထမ်းစာရင်းသွင်းရန်</Link>
-              </Menu.Item>
+              <SubMenu
+                key="Staff"
+                title="ဝန်ထမ်းစာရင်း"
+                icon={<ContactsOutlined />}
+              >
+                <Menu.Item key="CreateStaff" icon={<SaveOutlined />}>
+                  <Link to="/admin/create-staff">အသစ်ဖန်တီးရန်</Link>
+                </Menu.Item>
 
-              <Menu.Item key="ShowStaff" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-staff">ဝန်ထမ်းစာရင်း</Link>
-              </Menu.Item>
+                <Menu.Item key="ShowStaff" icon={<UnorderedListOutlined />}>
+                  <Link to="/admin/show-staff">စာရင်း</Link>
+                </Menu.Item>
 
-              <Menu.Item key="StaffCommession" icon={<UnorderedListOutlined />}>
-                <Link to="/admin/show-staff-commession">
-                  ၀န်ထမ်းလခနှင့်ကော်မရှင်
-                </Link>
-              </Menu.Item>
-            </SubMenu>
+                <Menu.Item
+                  key="StaffCommession"
+                  icon={<UnorderedListOutlined />}
+                >
+                  <Link to="/admin/show-staff-commession">
+                    လခနှင့်ကော်မရှင်
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
             )}
             <SubMenu
               key="Expenses"
@@ -434,7 +439,7 @@ const Admin = ({ logout }) => {
                 key="ShowExpenseNames"
                 icon={<UnorderedListOutlined />}
               >
-                <Link to="/admin/show-expense-names">ကုန်ကျစရိတ်အမည်များ</Link>
+                <Link to="/admin/show-expense-names">အမည်များ</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -461,6 +466,12 @@ const Admin = ({ logout }) => {
                 </Menu.Item>
                 <Menu.Item key="ReportScreem" icon={<UnorderedListOutlined />}>
                   <Link to="/admin/report-screem">Report Screen</Link>
+                </Menu.Item>
+                <Menu.Item
+                  key="PurchaseReport"
+                  icon={<UnorderedListOutlined />}
+                >
+                  <Link to="/admin/purchase-report">Purchase</Link>
                 </Menu.Item>
               </SubMenu>
             )}
@@ -529,6 +540,7 @@ const Admin = ({ logout }) => {
               <Route path="voucher-report" element={<VoucherReports />} />
               <Route path="service-report" element={<ServicesReport />} />
               <Route path="report-screem" element={<ReportScreem />} />
+              <Route path="purchase-report" element={<PurchaseReport />} />
 
               {/* end supplier */}
               <Route path="create-items" element={<CreateItems />} />

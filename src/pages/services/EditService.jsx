@@ -43,7 +43,7 @@ const EditService = ({ editServices, getService }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ဝန်ဆောင်မှုအချက်အလက်သွင်းရန်စာမျက်နှာ
+          ဝန်ဆောင်မှုအချက်အလက်ပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Form
           labelCol={{

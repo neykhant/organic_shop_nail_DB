@@ -51,15 +51,14 @@ export const getExpenses = () => {
           key: expense.id
         };
       });
-      // console.log(result)
+
+      // console.log("show",result)
       if (response.status === 200) {
         dispatch(showExpenses(result));
       }
     } catch (error) {
       if (error.response.status === 404) {
         dispatch(setExpenseError(error.response.data.data));
-      } else {
-        dispatch(setExpenseError(error.response.data));
       }
     }
   };
@@ -100,7 +99,7 @@ export const saveExpenses = (data) => {
           key: expense.id
         };
       });
-      console.log(result);
+      // console.log("save",result);
       if (response.status === 201) {
         dispatch(createExpenses(result));
       }

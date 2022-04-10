@@ -57,6 +57,7 @@ export const deletePurchaseCredits = (id) => {
       const response = await axios.delete(
         `http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/purchase-credits/${id}`
       );
+      console.log(response)
       if (response.status === 204) {
         dispatch(filterPurchaseCredits(id));
       }

@@ -7,7 +7,7 @@ import {
   Button,
   Table,
   Select,
-  DatePicker,
+  DatePicker
 } from "antd";
 import Layout from "antd/lib/layout/layout";
 import queryString from "query-string";
@@ -16,6 +16,7 @@ import { getStaffReport } from "../../store/actions";
 import { useLocation } from "react-router-dom";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
+import { ExportToExcel } from "../../excel/ExportToExcel";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -43,46 +44,73 @@ const StaffComession = () => {
   const columns = [
     {
       title: "အမည်",
-      dataIndex: "name",
+      dataIndex: "name"
     },
     {
       title: "လခ",
-      dataIndex: "salary",
+      dataIndex: "salary"
     },
     {
       title: "ရက်မှန်ကြေး",
       dataIndex: "",
       render: (_) => {
         return 0;
-      },
+      }
     },
     {
       title: "ကော်မရှင်",
       dataIndex: "",
       render: (_, record) => {
+<<<<<<< HEAD
         return record?.services?.length > 0 ? record.services
           .map((service) => service.service.commercial)
           .reduce((a, b) => Number(a) + Number(b)) : 0;
       },
+=======
+        return record?.services?.length > 0
+          ? record.services
+              .map((service) => service.service.commercial)
+              .reduce((a, b) => Number(a) + Number(b))
+          : 0;
+      }
+>>>>>>> 5af86db0dcf70a5d9f0edb50145abc975f72f606
     },
     {
       title: "စုစုပေါင်း",
       dataIndex: "",
       render: (_, record) => {
+<<<<<<< HEAD
         const commercial = record?.services?.length > 0 ? record.services
           .map((service) => service.service.commercial)
           .reduce((a, b) => Number(a) + Number(b)) : 0;
+=======
+        const commercial =
+          record?.services?.length > 0
+            ? record.services
+                .map((service) => service.service.commercial)
+                .reduce((a, b) => Number(a) + Number(b))
+            : 0;
+>>>>>>> 5af86db0dcf70a5d9f0edb50145abc975f72f606
         return Number(commercial) + Number(record.salary);
-      },
-    },
+      }
+    }
   ];
 
   let total = 0;
 
   filterStaffs.forEach((filterStaff) => {
+<<<<<<< HEAD
     const commercial = filterStaff?.services?.length > 0 ? filterStaff?.services
       .map((service) => service.service.commercial)
       .reduce((a, b) => Number(a) + Number(b)) : 0;
+=======
+    const commercial =
+      filterStaff?.services?.length > 0
+        ? filterStaff?.services
+            .map((service) => service.service.commercial)
+            .reduce((a, b) => Number(a) + Number(b))
+        : 0;
+>>>>>>> 5af86db0dcf70a5d9f0edb50145abc975f72f606
 
     total += Number(commercial) + Number(filterStaff.salary);
   });
@@ -104,7 +132,7 @@ const StaffComession = () => {
           </Col>
 
           <Col span={3}>
-            <Button
+            {/* <Button
               style={{
                 backgroundColor: "var(--primary-color)",
                 color: "var(--white-color)",
@@ -114,24 +142,25 @@ const StaffComession = () => {
             >
               <ExportOutlined />
               Export
-            </Button>
+            </Button> */}
+            {/* <ExportToExcel apiData={result} fileName={fileName} /> */}
           </Col>
         </Row>
         <Row>
-          <Space direction="vertical" size={12}>
-            <RangePicker
-              onChange={(val) => {
-                window.location = `/admin/show-staff-commession?start_date=${dayjs(
-                  val[0]
-                ).format("YYYY-MM-DD")}&end_date=${dayjs(val[1]).format(
-                  "YYYY-MM-DD"
-                )}`;
-              }}
-            />
-          </Space>
-        </Row>
-        <Row>
-          <Col span={6}>
+          <Col span={8}>
+            <Space direction="vertical" size={12}>
+              <RangePicker
+                onChange={(val) => {
+                  window.location = `/admin/show-staff-commession?start_date=${dayjs(
+                    val[0]
+                  ).format("YYYY-MM-DD")}&end_date=${dayjs(val[1]).format(
+                    "YYYY-MM-DD"
+                  )}`;
+                }}
+              />
+            </Space>
+          </Col>
+          <Col span={8}>
             <Select
               showSearch
               placeholder="ကျေးဇူးပြု၍ ဝန်ထမ်းအမည်ရွေးပါ"
@@ -151,15 +180,12 @@ const StaffComession = () => {
               ))}
             </Select>
           </Col>
-
-          <Col span={6}> </Col>
-          <Col span={5}> </Col>
-          <Col span={7}>
+          <Col span={8}>
             <Text
               style={{
                 backgroundColor: "var(--primary-color)",
                 padding: "10px",
-                color: "var(--white-color)",
+                color: "var(--white-color)"
               }}
             >
               စုစုပေါင်း = {total}

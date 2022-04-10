@@ -239,6 +239,7 @@ const CreateBuyMerchants = ({
           </Title>
         </Space>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3

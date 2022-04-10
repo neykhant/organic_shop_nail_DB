@@ -34,8 +34,6 @@ const CreateMerchants = ({
   const shops = useSelector((state) => state.shop.shops);
   const navigate = useNavigate();
 
-  // console.log(merchant.isSuccess)
-
   useEffect(() => {
     const fetchData = async () => {
       await getShops();
@@ -76,6 +74,7 @@ const CreateMerchants = ({
           ကုန်သည်အချက်အလက်သွင်းရန်စာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3

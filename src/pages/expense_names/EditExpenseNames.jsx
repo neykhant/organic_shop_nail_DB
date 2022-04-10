@@ -38,7 +38,7 @@ const EditExpenseNames = ({ editExpenseNames, getExpenseName }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ကုန်ကျစရိတ်အမည် သွင်းခြင်း စာမျက်နှာ
+          ကုန်ကျစရိတ်အမည်ပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Form
           labelCol={{

@@ -58,6 +58,7 @@ const CreateStaff = ({ saveStaffs }) => {
           ၀န်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3

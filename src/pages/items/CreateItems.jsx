@@ -132,6 +132,7 @@ const CreateItems = ({ saveItems, error }) => {
         </Title>
 
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3

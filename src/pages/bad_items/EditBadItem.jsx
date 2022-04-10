@@ -116,7 +116,7 @@ const EditBadItem = ({
 
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ချို့ယွင်းချက်ရှိပစ္စည်းများ
+          ချို့ယွင်းချက်ရှိပစ္စည်းများပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Space
           direction="horizontal"

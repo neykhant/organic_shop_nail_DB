@@ -58,7 +58,7 @@ const EditShops = ({ editShops,getShop, clearAlert }) => {
 
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ဆိုင်အမည် သွင်းခြင်း စာမျက်နှာ
+          ဆိုင်အမည်ပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Form
           labelCol={{

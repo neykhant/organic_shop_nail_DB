@@ -60,7 +60,7 @@ const EditMembers = ({
   }, [member, shops, result]);
 
   const onFinish = async (values) => {
-    console.log(values);
+    // console.log(values);
     await editMembers(param?.id, values);
     navigate("/admin/show-members");
   };

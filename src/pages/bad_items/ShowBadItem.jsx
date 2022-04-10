@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Typography, Space, Row, Col, Button, Table, notification } from "antd";
 import Layout from "antd/lib/layout/layout";
-import { ExportOutlined, PlusSquareOutlined } from "@ant-design/icons";
+import { ExportOutlined, DeleteOutlined, EditOutlined, PlusSquareOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { getBadItems, deleteBadItems, getBadItem } from "../../store/actions";
 import { connect } from "react-redux";
@@ -66,10 +66,10 @@ const ShowBadItem = ({ getBadItems, deleteBadItems, getBadItem }) => {
       render: (_, record) => (
         <Space direction="horizontal">
           <Button type="primary" onClick={() => handleClick(record)}>
-            Edit
+            <EditOutlined/>
           </Button>
           <Button type="primary" danger onClick={() => handleDelete(record)}>
-            Delete
+          <DeleteOutlined />
           </Button>
         </Space>
       )

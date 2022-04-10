@@ -56,10 +56,6 @@ const ShowBuyMerchants = ({
     setMyPurchase([...myPurchase, ...allPurchases]);
   }, []);
 
-  let allCredit = [];
-  allPurchases.forEach((purchase) => allCredit.push(parseInt(purchase.credit)));
-  const finalCredit = allCredit.reduce((a, b) => a + b, 0);
-
   useEffect(() => {
     const fetchData = async () => {
       await getMerchants();
@@ -101,6 +97,14 @@ const ShowBuyMerchants = ({
     });
   };
 
+  let allCredit = [];
+  allPurchases.forEach((purchase) => allCredit.push(parseInt(purchase.credit)));
+  const finalCredit = allCredit.reduce((a, b) => a + b, 0);
+
+  let allCreditGet = [];
+  showBuyMerchant?.forEach((mr) => allCreditGet.push(parseInt(mr.credit)));
+  const finalCreditGet = allCreditGet.reduce((a, b) => a + b, 0);
+
   const handleDelete = async (record) => {
     const filterMyPurchase = myPurchase.filter(
       (purchase) => purchase.id !== record.id
@@ -116,16 +120,33 @@ const ShowBuyMerchants = ({
   };
 
   const handleDetail = async (record) => {
-    console.log(record.id);
     // await getPurchase(record.id);
     navigate(`/admin/show-purchase/${record.id}`);
   };
+
+  // const getPurchasesData = allPurchases.map((p) =>
+  //   p.purchase_items.map((item) => ({
+  //     name: item.item.name
+  //   }))
+  // );
+
+  // console.log("dfsdf", getPurchasesData);
 
   const columns = [
     {
       title: "ရက်စွဲ",
       dataIndex: `created_at`,
       render: (_, record) => getReadableDateDisplay(record.created_at)
+    },
+    {
+      title: "ပစ္စည်းအမည်",
+      dataIndex: `created_at`,
+      render: (_, record) => record.purchase_items.map((p) => p.item.name)
+    },
+    {
+      title: "အရေအတွက်",
+      dataIndex: `created_at`,
+      render: (_, record) => record.purchase_items.map((p) => p.quantity)
     },
     {
       title: "ကုန်သည်လုပ်ငန်းအမည်",
@@ -136,7 +157,7 @@ const ShowBuyMerchants = ({
           : record?.merchant?.company_name
     },
     {
-      title: "ပေးချေပြီးပမာဏ",
+      title: "ကနဦးပေးချေခဲ့သည့်ပမာဏ",
       dataIndex: "paid"
     },
     {
@@ -229,8 +250,17 @@ const ShowBuyMerchants = ({
               style={{ width: "100%", justifyContent: "right" }}
               size="large"
             >
-              <Title level={4}>ပေးရန်ကျန်ငွေစုစုပေါင်း - </Title>
-              <Title level={4}>{finalCredit} Ks</Title>
+              <Text
+                style={{
+                  backgroundColor: "var(--primary-color)",
+                  padding: "10px",
+                  color: "var(--white-color)",
+                  borderRadius: "5px"
+                }}
+              >
+                ပေးရန်ကျန်ငွေစုစုပေါင်း ={" "}
+                {showBuyMerchant != null ? finalCreditGet : finalCredit} Ks
+              </Text>
             </Space>
           </Col>
         </Row>

@@ -197,6 +197,7 @@ const CreateItemTransfer = ({
         </Space>
 
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3,

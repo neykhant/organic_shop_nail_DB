@@ -18,10 +18,10 @@ const ShowAccounts = ({ deleteAccounts }) => {
   const accounts = useSelector((state) => state.account.accounts);
   const fileName = "Accounts"; // here enter filename for your excel file
   const result = accounts.map((account) => ({
-    name: account.name,
-    phone: account.phone,
-    position: account.position,
-    shop: account.shop.name
+    name: account?.name,
+    phone: account?.phone,
+    position: account?.position,
+    shop: account?.shop?.name
   }));
 
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const ShowAccounts = ({ deleteAccounts }) => {
     {
       title: "ဆိုင်အမည်",
       dataIndex: "shop",
-      render: (_, data) => data.shop.name
+      render: (_, data) => data.shop?.name
     },
     {
       title: "Actions",

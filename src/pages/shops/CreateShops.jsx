@@ -50,6 +50,7 @@ const CreateShops = ({ saveShops, shop, clearAlert }) => {
           ဆိုင်အမည် သွင်းခြင်း စာမျက်နှာ
         </Title>
         <Form
+          colon={false}
           labelCol={{
             xl: {
               span: 3

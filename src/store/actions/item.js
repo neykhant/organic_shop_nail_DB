@@ -5,37 +5,37 @@ import {
   CREATE_ITEMS,
   UPDATE_ITEMS,
   FILTER_ITEMS,
-  ERROR_ITEM,
+  ERROR_ITEM
 } from "../type";
 
 export const showItems = (items) => ({
   type: SHOW_ITEMS,
-  items,
+  items
 });
 
 export const showItem = (item) => ({
   type: SHOW_ITEM,
-  item,
+  item
 });
 
 export const createItems = (item) => ({
   type: CREATE_ITEMS,
-  item,
+  item
 });
 
 export const filterItems = (id) => ({
   type: FILTER_ITEMS,
-  id,
+  id
 });
 
 export const updateItems = (data) => ({
   type: UPDATE_ITEMS,
-  data,
+  data
 });
 
 export const setItemErrors = (error) => ({
   type: ERROR_ITEM,
-  error,
+  error
 });
 
 export const getItems = () => {
@@ -47,7 +47,7 @@ export const getItems = () => {
       const result = response.data.data.map((item) => {
         return {
           ...item,
-          key: item.id,
+          key: item.id
         };
       });
       // console.log(result)
@@ -95,7 +95,7 @@ export const saveItems = (data) => {
       );
       const result = {
         ...response.data.data,
-        key: response.data.data.id,
+        key: response.data.data.id
       };
       // console.log(result)
       dispatch(createItems(result));
@@ -139,7 +139,7 @@ export const editItems = (id, data) => {
       );
       const result = {
         ...response.data.data,
-        key: response.data.data.id,
+        key: response.data.data.id
       };
       // console.log(result);
       if (response.status === 204) {
@@ -164,13 +164,12 @@ export const getBestItem = (query) => {
           query
         ).toString()}`
       );
-
-      console.log(query.best);
+      // console.log(query.best);
       if (query.best) {
         const result = response.data.data.map((item) => {
           return {
             ...item,
-            key: item.item_id,
+            key: Math.random() * 100
           };
         });
         dispatch(showItems(result));
@@ -178,7 +177,7 @@ export const getBestItem = (query) => {
         const result = response.data.data.map((item) => {
           return {
             ...item,
-            key: item.id,
+            key: Math.random() * 100
           };
         });
         dispatch(showItems(result));

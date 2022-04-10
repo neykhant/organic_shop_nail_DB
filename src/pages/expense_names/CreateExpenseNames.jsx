@@ -35,6 +35,7 @@ const CreateExpenseNames = ({saveExpenseNames}) => {
           ကုန်ကျစရိတ်အမည် သွင်းခြင်း စာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             span: 3,
           }}

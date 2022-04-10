@@ -61,7 +61,7 @@ const EditItems = ({ editItems, getItem }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ပစ္စည်းအချက်အလက်သွင်းရန်စာမျက်နှာ
+          ပစ္စည်းအချက်အလက်ပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Form
           labelCol={{
@@ -131,7 +131,6 @@ const EditItems = ({ editItems, getItem }) => {
               size="large"
             />
           </Form.Item>
-
 
           <Form.Item
             name="buy_price"

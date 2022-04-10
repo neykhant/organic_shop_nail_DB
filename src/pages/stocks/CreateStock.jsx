@@ -49,8 +49,8 @@ const CreateItems = ({ saveItems }) => {
 
   const openNotificationWithIcon = (type) => {
     notification[type]({
-      message: 'Saved Your Data',
-      description: 'Your data have been saved.',
+      message: "Saved Your Data",
+      description: "Your data have been saved.",
       duration: 3
     });
   };
@@ -61,7 +61,6 @@ const CreateItems = ({ saveItems }) => {
     } else {
       await saveItems(items);
       setItems([]);
-      
     }
   };
 
@@ -109,12 +108,13 @@ const CreateItems = ({ saveItems }) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-        ပစ္စည်းအဝယ်သွင်းရန်စာမျက်နှာ
+          ပစ္စည်းအဝယ်သွင်းရန်စာမျက်နှာ
         </Title>
         <Form
+          colon={false}
           labelCol={{
             xl: {
-                span: 3
+              span: 3
             }
           }}
           wrapperCol={{

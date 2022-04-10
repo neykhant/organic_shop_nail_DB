@@ -117,6 +117,7 @@ const CreateService = ({ getServices, saveServices }) => {
           ဝန်ဆောင်မှုအချက်အလက်သွင်းရန်စာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3

@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   SHOW_PURCHASES,
   SHOW_PURCHASE,
+  SHOW_PURCHASE_REPORT,
   CREATE_PURCHASES,
   UPDATE_PURCHASES,
   FILTER_PURCHASES,
@@ -16,6 +17,11 @@ export const showPurchases = (purchases) => ({
 export const showPurchase = (purchase) => ({
   type: SHOW_PURCHASE,
   purchase
+});
+
+export const showPurchaseReport = (purchaseReport) => ({
+  type: SHOW_PURCHASE_REPORT,
+  purchaseReport
 });
 
 export const createPurchases = (purchase) => ({
@@ -38,6 +44,33 @@ export const setPurchaseErrors = (error) => ({
   error
 });
 
+
+export const getBestPurchase = (query) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/purchaseReport?${new URLSearchParams(
+          query
+        ).toString()}`
+      );
+      // console.log(response.data.data);
+      const result = response.data.data.map((purchase) => {
+        return {
+          ...purchase,
+          key: purchase.id
+        };
+      });
+      // console.log(result);
+      // dispatch(showPurchases(result));
+      dispatch(showPurchaseReport(result));
+    } catch (error) {
+      if (error.response.status === 404) {
+        dispatch(setPurchaseErrors(error.response.data.data));
+      }
+    }
+  };
+};
+
 export const getPurchase = (id) => {
   return async (dispatch) => {
     try {
@@ -51,8 +84,6 @@ export const getPurchase = (id) => {
     } catch (error) {
       if (error.response.status === 404) {
         dispatch(setPurchaseErrors(error.response.data.data));
-      } else {
-        dispatch(setPurchaseErrors(error.response.data));
       }
     }
   };
@@ -64,7 +95,7 @@ export const getPurchases = () => {
       const response = await axios.get(
         "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/purchases"
       );
-      // console.log(response);
+      // console.log('ss',response);
 
       const result = response.data.data.map((purchase) => {
         return {
@@ -144,6 +175,30 @@ export const editPurchases = (id, data) => {
       // } else {
       //   dispatch(setItemErrors(error.response.data));
       // }
+    }
+  };
+};
+
+export const getPurchaseReport = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        "http://organicapi.92134691-30-20190705152935.webstarterz.com/api/v1/purchaseReport"
+      );
+      const result = response.data.data.map((purchase) => {
+        return {
+          ...purchase,
+          key: purchase.merchant_id
+        };
+      });
+      // console.log(result)
+      if (response.status === 201) {
+        dispatch(showPurchaseReport(result));
+      }
+    } catch (error) {
+      if (error.response.status === 404) {
+        dispatch(setPurchaseErrors(error.response.data.data));
+      }
     }
   };
 };

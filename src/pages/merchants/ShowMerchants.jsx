@@ -83,7 +83,7 @@ const ShowMerchants = ({
       dataIndex: "company_name"
     },
     {
-      title: "အခြားအချက်လက်",
+      title: "အခြားအချက်အလက်",
       dataIndex: "other"
     },
     {

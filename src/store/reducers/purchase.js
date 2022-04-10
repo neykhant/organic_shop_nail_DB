@@ -1,6 +1,7 @@
 import {
   SHOW_PURCHASES,
   SHOW_PURCHASE,
+  SHOW_PURCHASE_REPORT,
   CREATE_PURCHASES,
   UPDATE_PURCHASES,
   FILTER_PURCHASES,
@@ -10,8 +11,10 @@ import {
   const initialState = {
     purchases: [],
     purchase: {},
+    purchaseReport: [],
     error: {}
   };
+  
   
   const item = (state = initialState, action) => {
     switch (action.type) {
@@ -23,6 +26,10 @@ import {
         return {
           ...state,
           purchases: action.purchases
+        };
+      case SHOW_PURCHASE_REPORT:
+        return {
+          purchaseReport: action.purchaseReport
         };
       case SHOW_PURCHASE:
         return {

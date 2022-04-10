@@ -22,7 +22,7 @@ import { connect } from "react-redux";
 
 const { Title, Text } = Typography;
 
-const EditStaff = ({editStaffs}) => {
+const EditStaff = ({ editStaffs }) => {
   const { id } = useParams();
   const [fileList, setFileList] = useState([]);
   const AllStaffs = useSelector((state) => state.staff.staffs);
@@ -50,7 +50,7 @@ const EditStaff = ({editStaffs}) => {
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
-  const onFinish =async (values) => {
+  const onFinish = async (values) => {
     if (fileList.length === 0) {
       message.error("ကျေးဇူးပြု၍၀န်ထမ်:ပုံထည့်ပါ");
     }
@@ -64,7 +64,7 @@ const EditStaff = ({editStaffs}) => {
     if (fileList[0].status !== "done") {
       formData.append("image", fileList[0].originFileObj);
     }
-    await editStaffs(id, formData)
+    await editStaffs(id, formData);
     navigate("/admin/show-staff");
   };
 
@@ -72,9 +72,10 @@ const EditStaff = ({editStaffs}) => {
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          ၀န်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ {id}
+          ၀န်ထမ်းစာရင်းးပြုပြင်ရန်စာမျက်နှာ
         </Title>
         <Form
+          colon={false}
           labelCol={{
             xl: {
               span: 3
@@ -118,7 +119,7 @@ const EditStaff = ({editStaffs}) => {
             />
           </Form.Item>
           <Form.Item
-          format="DD/MM/YYYY"
+            format="DD/MM/YYYY"
             name="dob"
             label="မွေးသက္ကရာဇ်"
             rules={[
@@ -129,7 +130,6 @@ const EditStaff = ({editStaffs}) => {
             ]}
           >
             <Input
-            
               placeholder="မွေးသက္ကရာဇ်ထည့်ပါ"
               prefix={<EditOutlined />}
               style={{ borderRadius: "10px" }}

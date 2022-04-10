@@ -52,9 +52,10 @@ const ChangePassword = ({ clearAlertAccount, changePassword }) => {
 
       <Space direction="vertical" size="middle">
         <Title style={{ textAlign: "center" }} level={3}>
-          စကားဝှက်ပြောင်ရန်စာမျက်နှာ
+          စကားဝှက်ပြောင်းရန်စာမျက်နှာ
         </Title>
         <Form
+          colon={false}
           labelCol={{
             xl: {
               span: 3

@@ -63,6 +63,7 @@ const CreateMembers = ({ shop, saveMembers, getShops }) => {
           Member စာရင်းသွင်းခြင်း စာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3

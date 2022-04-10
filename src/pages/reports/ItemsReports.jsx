@@ -1,5 +1,14 @@
-import React, { useEffect } from "react";
-import { Typography, Space, Row, Col, Button, Table, DatePicker } from "antd";
+import React, { useEffect, useState } from "react";
+import {
+  Typography,
+  Space,
+  Row,
+  Col,
+  Button,
+  Table,
+  DatePicker,
+  Select
+} from "antd";
 import Layout from "antd/lib/layout/layout";
 import queryString from "query-string";
 import { getReadableDateDisplay } from "../../uitls/convertToHumanReadableTime";
@@ -7,15 +16,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { connect, useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 import { getBestItem } from "../../store/actions";
+import Text from "antd/lib/typography/Text";
 
 const { Title } = Typography;
+const { Option } = Select;
 
 const ItemsReports = () => {
   const { RangePicker } = DatePicker;
   const dispatch = useDispatch();
   const location = useLocation();
   const items = useSelector((state) => state.item.items);
-
   useEffect(() => {
     const fetchData = async () => {
       dispatch(getBestItem(queryString.parse(location.search)));
@@ -26,6 +36,16 @@ const ItemsReports = () => {
     };
   }, [getBestItem, location]);
 
+  const [showBuyMerchant, setshowBuyMerchant] = useState(null);
+  const onChange = (value) => {
+    if (value === undefined) {
+      setshowBuyMerchant([]);
+    } else {
+      const filterBuyMerchant = items.filter((mer) => mer.id === value);
+      setshowBuyMerchant(filterBuyMerchant);
+    }
+  };
+
   let columns = [];
 
   if (!queryString.parse(location.search).best) {
@@ -33,52 +53,52 @@ const ItemsReports = () => {
       {
         title: "စဉ်",
         dataIndex: "order",
-        render: (_, record) => record.id,
+        render: (_, record) => record.id
       },
       {
         title: "ရက်စွဲ",
         dataIndex: "invoice.created_at",
         render: (_, record) =>
-          getReadableDateDisplay(record.invoice?.created_at),
-        // render: (_,record) => ("clg",console.log(record))
+          getReadableDateDisplay(record.invoice?.created_at)
       },
       {
         title: "ပစ္စည်းအမည်",
         dataIndex: "invoice.stock",
-        render: (_, record) => record.item?.name,
+        render: (_, record) => record.item?.name
       },
 
       {
         title: "အရေအတွက်",
-        dataIndex: "quantity",
+        dataIndex: "quantity"
       },
       {
         title: "စုစုပေါင်း",
-        render: (_, record) => record.price * record.quantity,
-      },
+        render: (_, record) => record.price * record.quantity
+      }
     ];
   } else {
     columns = [
       {
         title: "စဉ်",
         dataIndex: "order",
-        render: (_, record) => record.item_id,
+        render: (_, record) => record.item_id
+        // render: (_, record) => console.log(record)
       },
       {
         title: "ပစ္စည်းအမည်",
         dataIndex: "invoice.stock",
-        render: (_, record) => record.item?.name,
+        render: (_, record) => record.item?.name
       },
 
       {
         title: "အရေအတွက်",
-        dataIndex: "total_qty",
+        dataIndex: "total_qty"
       },
       {
         title: "စုစုပေါင်း",
-        dataIndex: "total_subtotal",
-        // render: (_, record) => record.stock.item.sale_price*record.total_qty,
-      },
+        dataIndex: "total_subtotal"
+        // render: (_, record) => record?.stock?.item?.sale_price*record?.total_qty,
+      }
     ];
   }
 
@@ -92,39 +112,67 @@ const ItemsReports = () => {
           <Col span={3}></Col>
           <Col span={3}></Col>
         </Row>
-
-        <Space direction="vertical" size={12}>
-          <RangePicker
-            onChange={(val) => {
-              //alert(dayjs(val[0]).format("YYYY-MM-DD"))
-              if (queryString.parse(location.search).best) {
-                window.location = `/admin/item-report?best=true&start_date=${dayjs(
-                  val[0]
-                ).format("YYYY-MM-DD")}&end_date=${dayjs(val[1]).format(
-                  "YYYY-MM-DD"
-                )}`;
-              } else {
-                window.location = `/admin/item-report?start_date=${dayjs(
-                  val[0]
-                ).format("YYYY-MM-DD")}&end_date=${dayjs(val[1]).format(
-                  "YYYY-MM-DD"
-                )}`;
-              }
-            }}
-          />
-        </Space>
+        <Space direction="vertical" size={12}></Space>
 
         <Row>
-          <Col span={5}>
-            
+          <Col span={6}>
+            <RangePicker
+              onChange={(val) => {
+                //alert(dayjs(val[0]).format("YYYY-MM-DD"))
+                if (queryString.parse(location.search).best) {
+                  window.location = `/admin/item-report?best=true&start_date=${dayjs(
+                    val[0]
+                  ).format("YYYY-MM-DD")}&end_date=${dayjs(val[1]).format(
+                    "YYYY-MM-DD"
+                  )}`;
+                } else {
+                  window.location = `/admin/item-report?start_date=${dayjs(
+                    val[0]
+                  ).format("YYYY-MM-DD")}&end_date=${dayjs(val[1]).format(
+                    "YYYY-MM-DD"
+                  )}`;
+                }
+              }}
+            />
           </Col>
-          <Col span={14}></Col>
-          <Col span={5}>
+          <Col span={12}>
+            <Space
+              direction="horizontal"
+              style={{
+                width: "100%",
+                marginBottom: "10px"
+              }}
+              size="large"
+            >
+              <Text type="secondary">ပစ္စည်းအမည်ရွေးပါ</Text>
+              <Select
+                showSearch
+                placeholder="ကျေးဇူးပြု၍ ပစ္စည်းအမည်ရွေးပါ"
+                optionFilterProp="children"
+                onChange={onChange}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+                allowClear={true}
+                size="large"
+                style={{ borderRadius: "10px" }}
+              >
+                {items.map((item) => (
+                  <Option key={item.key} value={item.id}>
+                    {item.item.name}
+                  </Option>
+                ))}
+              </Select>
+            </Space>
+          </Col>
+
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--primary-color)",
                 color: "var(--white-color)",
-                borderRadius: "5px",
+                borderRadius: "5px"
               }}
               block
               onClick={() => (window.location = "/admin/item-report?best=true")}
@@ -138,7 +186,7 @@ const ItemsReports = () => {
           bordered
           columns={columns}
           pagination={{ defaultPageSize: 10 }}
-          dataSource={items}
+          dataSource={showBuyMerchant != null ? showBuyMerchant : items}
         />
       </Space>
     </Layout>

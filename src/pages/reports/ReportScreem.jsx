@@ -141,7 +141,7 @@ const ReportScreem = () => {
             </Input.Group>
           </Col>
           <Col span={8} style={{ textAlign: "right" }}>
-            <Button
+            {/* <Button
               style={{
                 backgroundColor: "var(--primary-color)",
                 color: "var(--white-color)",
@@ -151,7 +151,7 @@ const ReportScreem = () => {
             >
               <ExportOutlined />
               Export
-            </Button>
+            </Button> */}
           </Col>
         </Row>
         <Table

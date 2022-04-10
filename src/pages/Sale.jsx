@@ -346,6 +346,7 @@ const Sale = ({
   const handleDashboard = () => {
     navigate("/admin/dashboard");
   };
+
   const columns = [
     {
       title: "စဥ်",
@@ -805,6 +806,7 @@ const Sale = ({
                       <Option value="KBZ">KBZ</Option>
                       <Option value="AYA">AYA</Option>
                       <Option value="CB">CB</Option>
+                      <Option value="Kpay">Kpay</Option>
                     </Select>
                   </Space>
                 </Col>

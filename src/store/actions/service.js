@@ -52,7 +52,6 @@ export const getBestService = (query) => {
           key: service.id
         };
       });
-
       dispatch(showServices(result));
     } catch (error) {
       if (error.response.status === 404) {
@@ -128,8 +127,6 @@ export const saveServices = (data) => {
     } catch (error) {
       if (error.response.status === 404) {
         dispatch(setServiceError(error.response.data.data));
-      } else {
-        dispatch(setServiceError(error.response.data));
       }
     }
   };

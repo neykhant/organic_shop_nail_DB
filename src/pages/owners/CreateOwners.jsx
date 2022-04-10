@@ -80,6 +80,7 @@ const CreateOwners = ({ saveOwners, getStocks }) => {
           လုပ်ငန်းရှင်မှပစ္စည်းထုတ်သုံးခြင်းစာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3,

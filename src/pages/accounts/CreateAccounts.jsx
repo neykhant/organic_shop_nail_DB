@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
-import { Form, Input, Typography, Space, Button, Select, notification } from "antd";
+import {
+  Form,
+  Input,
+  Typography,
+  Space,
+  Button,
+  Select,
+  notification
+} from "antd";
 import Layout from "antd/lib/layout/layout";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
@@ -28,8 +36,8 @@ const CreateAccounts = ({ saveAccounts, getShops }) => {
 
   const openNotificationWithIcon = (type) => {
     notification[type]({
-      message: 'Saved Your Data',
-      description: 'Your data have been saved.',
+      message: "Saved Your Data",
+      description: "Your data have been saved.",
       duration: 3
     });
   };
@@ -37,7 +45,7 @@ const CreateAccounts = ({ saveAccounts, getShops }) => {
     await saveAccounts(values);
     form.resetFields();
     // navigate("/admin/show-accounts");
-    openNotificationWithIcon('success')
+    openNotificationWithIcon("success");
   };
 
   return (
@@ -47,6 +55,7 @@ const CreateAccounts = ({ saveAccounts, getShops }) => {
           အကောင့် ဖွင့်ခြင်း စာမျက်နှာ
         </Title>
         <Form
+        colon={false}
           labelCol={{
             xl: {
               span: 3
@@ -116,9 +125,8 @@ const CreateAccounts = ({ saveAccounts, getShops }) => {
               size="large"
               style={{ borderRadius: "10px" }}
             >
-              {/* <Option value="owner">Owner</Option> */}
               <Option value="manager">Manager</Option>
-              <Option value="casher">Casher</Option>
+              <Option value="casher">Cashier</Option>
               <Option value="staff">Staff</Option>
             </Select>
           </Form.Item>

@@ -153,6 +153,7 @@ const CreateExpenses = ({ expense_name, saveExpenses, getExpenseNames }) => {
             </Button> */}
           </Space>
           <Form
+          colon={false}
             labelCol={{
               xl: {
                 span: 3,

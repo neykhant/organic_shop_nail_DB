@@ -71,10 +71,10 @@ const ShowExpenseNames = ({ expenseNames, getExpenseNames, deleteExpenseNames, g
     <Layout style={{ margin: "20px" }}>
       <Space direction="vertical" size="middle">
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col span={16}>
             <Title level={3}>ကုန်ကျစရိတ်အမည်စာရင်း</Title>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
             <Button
               style={{
                 backgroundColor: "var(--secondary-color)",
@@ -88,7 +88,7 @@ const ShowExpenseNames = ({ expenseNames, getExpenseNames, deleteExpenseNames, g
               အသစ်ထည့်မည်
             </Button>
           </Col>
-          <Col span={3}>
+          <Col span={4}>
           <ExportToExcel apiData={result} fileName={fileName} />
           </Col>
         </Row>

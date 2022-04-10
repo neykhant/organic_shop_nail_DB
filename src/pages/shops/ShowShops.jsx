@@ -44,7 +44,6 @@ const ShowShops = ({ shop, getShops, deleteShops, getShop, clearAlert }) => {
     const fetchData = async () => {
       await getShops();
     };
-
     fetchData();
     return () => {
       fetchData();
